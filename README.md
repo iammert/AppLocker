@@ -3,6 +3,7 @@
   <img src="https://raw.githubusercontent.com/iammert/AppLocker/master/art/cover.png">
 </p>
 
+I decided to open source my side project SecureBox. I'm sure most of us are suffering in some android's APIs. This application already has some user on Play Store market. So this open source project provides you the working solution about specific API's. Below, you will find a list of technical things to learn from this project.
 [You can download app from Play Store](https://play.google.com/store/apps/details?id=com.momentolabs.app.security.applocker&hl=en)
 
 # App Features
@@ -21,7 +22,7 @@
 * App Usage Stat Manager (Is any app comes to foreground/background)
 * Background & Foreground Services (covers all android versions)
 * MVVM pattern using ViewState
-* DataBinding
+* DataBinding; Binding Adapter, Binding Conversion and more.
 * Kotlin Delegates
 * File Cryptography in Android
 * Call Screening Service (For creating custom dialer app)
