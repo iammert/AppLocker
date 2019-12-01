@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.browser.BrowserPageViewState"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:contentInsetLeft="0dp"
+                    android:contentInsetStart="0dp"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetStart="0dp"
+                    android:contentInsetRight="0dp"
+                    android:contentInsetEnd="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetEnd="0dp">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageViewBack"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/margin_16dp"
+                            app:srcCompat="@drawable/ic_back_gray"/>
+
+                    <EditText
+                            android:id="@+id/edittextUrl"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@+id/imageViewBack"
+                            android:background="@drawable/bg_browser_url"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:text="@{viewState.url}"
+                            android:layout_marginBottom="@dimen/margin_8dp"
+                            android:layout_centerVertical="true"
+                            android:inputType="text"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="@font/avenir_regular"
+                            android:textColor="@color/colorBlack"
+                            android:imeOptions="actionSearch"
+                            android:hint="@string/hint_browser_search"
+                            android:paddingLeft="@dimen/margin_16dp"
+                            android:layout_toLeftOf="@+id/imageViewAddBookmark"
+                            android:paddingRight="@dimen/margin_16dp"/>
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imageViewAddBookmark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@{viewState.getBookmarkIcon(context)}"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:focusable="true"
+                            android:layout_toLeftOf="@+id/imageViewBookmarks"
+                            android:padding="@dimen/margin_16dp"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imageViewBookmarks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:focusable="true"
+                            app:srcCompat="@drawable/ic_round_bookmarks_24px"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:padding="@dimen/margin_16dp"/>
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <ProgressBar
+                    android:theme="@style/WebViewProgress"
+                    android:indeterminate="false"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:progress="@{viewState.loadingProgressPercent}"
+                    android:visibility="@{viewState.loadingVisibility()}"/>
+
+            <LinearLayout
+                    android:id="@+id/layoutQuickBrowsing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_16dp"
+                    android:visibility="@{viewState.quickBrowsingVisibility()}"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:id="@+id/layoutFacebook"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/browser_quick_item_size"
+                            android:layout_height="@dimen/browser_quick_item_size"
+                            android:src="@drawable/ic_facebook"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:fontFamily="@font/avenir_regular"
+                            android:textColor="@color/colorTextGray"
+                            android:text="@string/facebook"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/layoutYoutube"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/browser_quick_item_size"
+                            android:layout_height="@dimen/browser_quick_item_size"
+                            android:src="@drawable/ic_youtube"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:fontFamily="@font/avenir_regular"
+                            android:textColor="@color/colorTextGray"
+                            android:text="@string/youtube"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/layoutTwitter"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/browser_quick_item_size"
+                            android:layout_height="@dimen/browser_quick_item_size"
+                            android:src="@drawable/ic_twitter"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:fontFamily="@font/avenir_regular"
+                            android:textColor="@color/colorTextGray"
+                            android:text="@string/twitter"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/layoutInstagram"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/browser_quick_item_size"
+                            android:layout_height="@dimen/browser_quick_item_size"
+                            android:src="@drawable/ic_instagram"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:fontFamily="@font/avenir_regular"
+                            android:textColor="@color/colorTextGray"
+                            android:text="@string/instagram"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewState.quickBrowsingVisibility()}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewWorldColorful"
+                    android:layout_width="120dp"
+                    android:alpha="0.3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="96dp"
+                    android:layout_height="120dp"
+                    app:srcCompat="@drawable/ic_browser_colorful"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewEmptyTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextGrayLight"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/title_browser_empty"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/text_size_medium"
+                    android:layout_below="@+id/imageViewWorldColorful"
+                    android:layout_marginTop="@dimen/margin_16dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextGrayLight"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/subtitle_browser_empty"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/text_size_regular"
+                    android:layout_below="@+id/textViewEmptyTitle"
+                    android:layout_marginTop="@dimen/margin_8dp"/>
+
+        </RelativeLayout>
+
+        <WebView
+                android:id="@+id/webView"
+                android:background="@color/colorTextGray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</layout>

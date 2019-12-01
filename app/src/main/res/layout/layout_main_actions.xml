@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:orientation="vertical"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       app:cardCornerRadius="0dp"
+                                       app:cardElevation="2dp"
+                                       android:layout_marginTop="@dimen/margin_8dp"
+                                       android:layout_marginBottom="@dimen/margin_8dp"
+                                       app:cardBackgroundColor="@color/white">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/main_actions_size"
+                      android:background="@color/white"
+                      android:orientation="horizontal"
+                      android:gravity="center"
+                      android:paddingLeft="@dimen/margin_16dp"
+                      android:paddingRight="@dimen/margin_16dp">
+
+            <LinearLayout android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/layoutVault"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/margin_8dp">
+
+                <RelativeLayout android:layout_width="@dimen/item_main_action_size"
+                    android:layout_height="@dimen/item_main_action_size"
+                    android:background="@drawable/bg_icon_vault">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/item_main_action_image_size"
+                        android:layout_height="@dimen/item_main_action_image_size"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_vault"/>
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_regular"
+                    android:fontFamily="@font/avenir_regular"
+                    android:textColor="@color/colorTextGray"
+                    android:text="@string/title_main_vault"
+                    android:layout_marginTop="@dimen/margin_8dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/layoutCallBlocker"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:padding="@dimen/margin_8dp">
+
+                <RelativeLayout android:layout_width="@dimen/item_main_action_size"
+                    android:layout_height="@dimen/item_main_action_size"
+                    android:background="@drawable/bg_icon_call_blocker">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/item_main_action_image_size"
+                        android:layout_height="@dimen/item_main_action_image_size"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_call_blocker"/>
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_regular"
+                    android:fontFamily="@font/avenir_regular"
+                    android:textColor="@color/colorTextGray"
+                    android:text="@string/title_main_call_blocker"
+                    android:layout_marginTop="@dimen/margin_8dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:id="@+id/layoutBrowser"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:clickable="true"
+                          android:focusable="true"
+                          android:background="?attr/selectableItemBackgroundBorderless"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:padding="@dimen/margin_8dp">
+
+                <RelativeLayout android:layout_width="@dimen/item_main_action_size"
+                                android:layout_height="@dimen/item_main_action_size"
+                                android:background="@drawable/bg_icon_browser">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/item_main_action_image_size"
+                            android:layout_height="@dimen/item_main_action_image_size"
+                            android:layout_centerInParent="true"
+                            app:srcCompat="@drawable/ic_browser"/>
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_regular"
+                        android:fontFamily="@font/avenir_regular"
+                        android:textColor="@color/colorTextGray"
+                        android:text="@string/title_main_browser"
+                        android:layout_marginTop="@dimen/margin_8dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:id="@+id/layoutTheme"
+                          android:padding="@dimen/margin_8dp"
+                          android:clickable="true"
+                          android:focusable="true"
+                          android:background="?attr/selectableItemBackgroundBorderless">
+
+                <RelativeLayout android:layout_width="@dimen/item_main_action_size"
+                                android:layout_height="@dimen/item_main_action_size"
+                                android:background="@drawable/bg_icon_background">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/item_main_action_image_size"
+                            android:layout_height="@dimen/item_main_action_image_size"
+                            android:layout_centerInParent="true"
+                            app:srcCompat="@drawable/ic_background"/>
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_regular"
+                        android:fontFamily="@font/avenir_regular"
+                        android:textColor="@color/colorTextGray"
+                        android:text="@string/title_main_background"
+                        android:layout_marginTop="@dimen/margin_8dp"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

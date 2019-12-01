@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/background_dialog"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+        <View
+                android:layout_width="@dimen/width_dialog_indicator"
+                android:layout_height="@dimen/height_dialog_indicator"
+                android:layout_margin="@dimen/margin_16dp"
+                android:background="@drawable/shape_dialog_indicator"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/avenir_bold"
+                android:text="@string/dialog_add_to_blacklist_title"
+                android:textColor="@color/colorDialogTitle"
+                android:textSize="@dimen/text_size_medium"/>
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_24dp"
+                android:layout_marginRight="@dimen/margin_24dp"
+                android:background="@null"
+                android:fontFamily="@font/avenir_medium"
+                android:textSize="@dimen/text_size_medium"
+                android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:singleLine="true"
+                android:hint="@string/dialog_add_to_blacklist_name_hint"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="@dimen/margin_8dp"
+              android:background="@color/colorTextGrayLightAlpha"
+              android:layout_marginLeft="@dimen/margin_24dp"
+              android:layout_marginRight="@dimen/margin_24dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_24dp"
+                android:layout_marginRight="@dimen/margin_24dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:inputType="phone"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:fontFamily="@font/avenir_medium"
+                android:textSize="@dimen/text_size_medium"
+                android:background="@null"
+                android:hint="@string/dialog_add_to_blacklist_phone_hint"/>
+
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="@dimen/margin_8dp"
+              android:background="@color/colorTextGrayLightAlpha"
+              android:layout_marginLeft="@dimen/margin_24dp"
+              android:layout_marginRight="@dimen/margin_24dp"/>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/margin_16dp"
+                android:paddingBottom="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buttonCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:fontFamily="@font/avenir_regular"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_32dp"
+                    android:paddingTop="@dimen/margin_16dp"
+                    android:paddingRight="@dimen/margin_32dp"
+                    android:paddingBottom="@dimen/margin_16dp"
+                    android:text="@string/dialog_add_to_blacklist_action_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_regular"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonBlock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16dp"
+                    android:backgroundTint="@color/color_blocker"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_32dp"
+                    android:paddingTop="@dimen/margin_16dp"
+                    android:paddingRight="@dimen/margin_32dp"
+                    android:paddingBottom="@dimen/margin_16dp"
+                    android:text="@string/dialog_add_to_blacklist_action_block"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

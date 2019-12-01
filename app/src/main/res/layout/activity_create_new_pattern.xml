@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.newpattern.CreateNewPatternViewState"/>
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gradient_main">
+
+        <include layout="@layout/include_circles"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_medium"
+                android:fontFamily="@font/avenir_medium"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/patternLockView"
+                android:gravity="center"
+                android:text="@{viewState.getPromptText(context)}"
+                android:layout_marginLeft="@dimen/margin_32dp"
+                android:layout_marginRight="@dimen/margin_32dp"
+                android:layout_marginTop="@dimen/margin_16dp"/>
+
+        <com.andrognito.patternlockview.PatternLockView
+                android:id="@+id/patternLockView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginRight="@dimen/margin_32dp"
+                android:layout_marginBottom="@dimen/margin_32dp"
+                android:layout_marginLeft="@dimen/margin_32dp"
+                app:aspectRatio="square"
+                app:dotNormalSize="16dp"
+                app:dotSelectedSize="24dp"
+                app:pathWidth="6dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</layout>

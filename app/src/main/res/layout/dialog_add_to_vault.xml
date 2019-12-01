@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog.AddToVaultViewState" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_dialog"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/width_dialog_indicator"
+            android:layout_height="@dimen/height_dialog_indicator"
+            android:layout_margin="@dimen/margin_16dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_dialog_indicator"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewLoadingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/avenir_bold"
+            android:gravity="center"
+            android:text="@string/dialog_title_add_to_vault"
+            android:textColor="@color/colorDialogTitle"
+            android:textSize="@dimen/text_size_medium" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewLoadingInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:fontFamily="@font/avenir_regular"
+            android:gravity="center"
+            android:text="@string/dialog_description_process"
+            android:textColor="@color/colorDialogTitle"
+            android:textSize="@dimen/text_size_medium"/>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progressBarProcess"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16dp"
+            android:progressTint="@color/color_vault"
+            android:progress="@{viewState.progress}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:fontFamily="@font/avenir_regular"
+            android:gravity="center"
+            android:text="@{viewState.getPercentText(context)}"
+            android:textColor="@color/colorDialogTitle"
+            android:textSize="@dimen/text_size_small"
+            tools:text="%10"
+            android:layout_marginBottom="@dimen/margin_16dp"/>
+
+    </LinearLayout>
+
+</layout>

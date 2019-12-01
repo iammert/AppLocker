@@ -1,0 +1,24 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="bottomSheetDialogTheme">@style/BaseBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="BaseBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BaseBottomSheetDialogModal</item>
+    </style>
+
+    <style name="BaseBottomSheetDialogModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="WebViewProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorTextGrayLight</item>
+        <item name="android:progressBackgroundTint">@color/white</item>
+    </style>
+</resources>

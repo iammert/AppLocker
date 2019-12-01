@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gradient_main">
+
+
+        <include layout="@layout/include_circles"/>
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cardViewOverlay"
+                android:layout_marginLeft="@dimen/margin_16dp"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:backgroundTint="@color/colorWhite"
+                app:cardCornerRadius="@dimen/card_radius">
+
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_16dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/permission_usage_access_title"
+                            android:fontFamily="@font/avenir_medium"
+                            android:textSize="@dimen/text_size_regular"
+                            android:singleLine="true"
+                            android:textColor="@color/colorTextGray"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4dp"
+                            android:text="@string/permission_usage_access_description"
+                            android:fontFamily="@font/avenir_medium"
+                            android:textSize="@dimen/text_size_small"
+                            android:singleLine="true"
+                            android:textColor="@color/colorTextGrayLight"/>
+
+                </LinearLayout>
+
+                <Switch
+                        android:id="@+id/switchUsageAccess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/margin_16dp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textViewPrivacyPolicy"
+                android:layout_marginLeft="@dimen/margin_16dp"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:backgroundTint="@color/colorWhite"
+                app:cardCornerRadius="@dimen/card_radius">
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_16dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/permission_overlay_title"
+                            android:fontFamily="@font/avenir_medium"
+                            android:textSize="@dimen/text_size_regular"
+                            android:singleLine="true"
+                            android:textColor="@color/colorTextGray"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4dp"
+                            android:text="@string/permission_overlay_description"
+                            android:fontFamily="@font/avenir_medium"
+                            android:textSize="@dimen/text_size_small"
+                            android:singleLine="true"
+                            android:textColor="@color/colorTextGrayLight"/>
+
+                </LinearLayout>
+
+                <Switch
+                        android:id="@+id/switchOverlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/margin_16dp"/>
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+                android:id="@+id/textViewPrivacyPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_regular"
+                android:textColor="@color/white"
+                android:alpha="0.6"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:clickable="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:fontFamily="@font/avenir_medium"
+                android:text="@string/you_accept_privacy_policy"
+                android:padding="@dimen/margin_8dp"
+                android:singleLine="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:layout_above="@+id/buttonNext"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/buttonNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/next"
+                android:gravity="center"
+                android:fontFamily="@font/avenir_bold"
+                android:padding="@dimen/margin_16dp"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:layout_marginRight="@dimen/margin_16dp"
+                android:layout_marginLeft="@dimen/margin_16dp"
+                android:background="@drawable/bg_button_white"/>
+
+    </RelativeLayout>
+
+</layout>

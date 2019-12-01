@@ -1,0 +1,45 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">130dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_regular">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_xlarge">24sp</dimen>
+
+    <dimen name="margin_4dp">2dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
+    <dimen name="margin_64dp">64dp</dimen>
+
+    <dimen name="size_app_icon">48dp</dimen>
+
+    <dimen name="card_radius">6dp</dimen>
+
+    <dimen name="size_animation_app_icon">56dp</dimen>
+
+    <dimen name="width_dialog_indicator">96dp</dimen>
+    <dimen name="height_dialog_indicator">6dp</dimen>
+
+
+    <dimen name="height_background_item">160dp</dimen>
+
+    <dimen name="item_main_action_size">56dp</dimen>
+    <dimen name="item_main_action_image_size">24dp</dimen>
+    <dimen name="main_actions_size">108dp</dimen>
+    <dimen name="security_recyclerview_padding_top">116dp</dimen>
+
+    <dimen name="browser_quick_item_size">40dp</dimen>
+    <dimen name="bookmark_item_image_size">72dp</dimen>
+
+    <dimen name="size_item_call_blocker_avatar">56dp</dimen>
+
+</resources>

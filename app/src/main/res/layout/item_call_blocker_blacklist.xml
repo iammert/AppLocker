@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.callblocker.blacklist.BlackListItemViewState"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:gravity="center_vertical"
+                  android:paddingStart="@dimen/margin_16dp"
+                  android:paddingEnd="@dimen/margin_16dp"
+                  android:paddingTop="@dimen/margin_8dp"
+                  android:paddingBottom="@dimen/margin_8dp"
+                  android:clickable="true"
+                  android:background="?attr/selectableItemBackground"
+                  android:layout_height="wrap_content">
+
+        <RelativeLayout android:layout_width="@dimen/size_item_call_blocker_avatar"
+                        android:layout_height="@dimen/size_item_call_blocker_avatar"
+
+                        android:background="@drawable/bg_circle_gray">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewAvatarLetter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@{viewState.getFirstLetter(context)}"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/avenir_medium"
+                    android:textSize="@dimen/text_size_large"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextGrayDark"
+                    android:textSize="@dimen/text_size_regular"
+                    android:singleLine="true"
+                    android:text="@{viewState.getName(context)}"
+                    android:fontFamily="@font/avenir_medium"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewState.number}"
+                    android:layout_marginTop="@dimen/margin_4dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorTextGrayLight"
+                    android:textSize="@dimen/text_size_regular"
+                    android:fontFamily="@font/avenir_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

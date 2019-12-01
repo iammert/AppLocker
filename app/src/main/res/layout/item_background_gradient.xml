@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.background.GradientItemViewState"/>
+
+
+    </data>
+    <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_background_item"
+            android:layout_margin="@dimen/margin_8dp"
+            app:cardCornerRadius="@dimen/margin_8dp"
+            app:cardElevation="0dp">
+
+        <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="@{viewState.getGradiendDrawable(context)}"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:srcCompat="@drawable/ic_round_fingerprint_24px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/margin_16dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    app:srcCompat="@drawable/ic_vector_pattern"
+                    android:layout_marginLeft="@dimen/margin_16dp"
+                    android:layout_marginRight="@dimen/margin_16dp"
+                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_white_alpha"
+                    android:visibility="@{viewState.isCheckedVisible()}">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/oval_white"
+                        android:layout_centerInParent="true"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_round_check_green_24px"
+                        android:layout_centerInParent="true"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

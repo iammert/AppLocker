@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.momentolabs.app.security.applocker.ui.intruders.IntruderPhotoItemViewState" />
+    </data>
+
+
+    <com.momentolabs.app.security.applocker.ui.common.view.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/squareLayoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_4dp"
+            android:background="@color/colorTextGray"
+            android:scaleType="centerCrop"
+            app:file="@{viewState.getFilePath()}"
+            app:imageSize="@{viewState.imageSize}" />
+    </com.momentolabs.app.security.applocker.ui.common.view.SquareLayout>
+
+</layout>

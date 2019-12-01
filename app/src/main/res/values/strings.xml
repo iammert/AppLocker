@@ -1,0 +1,186 @@
+<resources>
+    <string name="app_name">Secure Box</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- AD unit ids-->
+    <string name="mobile_ad_id" translatable="false">ca-app-pub-7878654882882088~4416828367</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/5538338345</string>
+    <string name="overlay_banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/8597237218</string>
+    <string name="dashboard_banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/9894092735</string>
+
+
+    <string name="share">Share</string>
+    <string name="rate">Rate us</string>
+    <string name="feedback">Feedback</string>
+
+    <string name="app_security_description">Recommended to lock app</string>
+
+    <string name="notification_protecting_title">Protecting your apps</string>
+
+    <string name="notification_protecting_description">Lock your apps to protect your privacy.</string>
+
+    <string name="notification_permission_need_title">Enable permission to protection</string>
+
+    <string name="notification_permission_need_description">Please enable your permissions to use app locker.</string>
+    <string name="you_accept_privacy_policy">By continuing you agree the
+        <u>Privacy Policy</u>
+    </string>
+
+    <string name="header_recommended_to_lock">Recommended to lock</string>
+    <string name="header_all_apps">All applications</string>
+
+    <string name="title_general_settings">General</string>
+
+    <!-- Security -->
+    <string name="title_lock_all">Lock all</string>
+    <string name="description_lock_all">This will lock all of your apps</string>
+
+    <!-- Settings -->
+    <string name="title_unlock_all">Unlock all</string>
+
+    <string name="description_unlock_all">This will unlock all of your apps</string>
+    <string name="settings_change_pattern_title">Change pattern</string>
+
+    <string name="settings_change_pattern_description">Change your existing pattern</string>
+    <string name="message_pattern_changed">Pattern changed successfully</string>
+
+    <string name="setting_in_stealth_mode_title">Hide drawing</string>
+    <string name="setting_in_stealth_mode_description">Invisible pattern while drawing</string>
+    <string name="setting_fingerprint_title">Enable fingerprint</string>
+
+    <string name="setting_fingerprint_description">Launch app with your fingerprint.</string>
+    <string name="setting_fingerprint_not_supported_title">Fingerprint is not supported</string>
+
+    <string name="setting_fingerprint_not_supported_description">Your device doesn\'t have sensor</string>
+    <string name="setting_fingerprint_not_registered_title">Register your fingerprint</string>
+
+    <string name="setting_fingerprint_not_registered_description">Go to security settings</string>
+    <string name="next">Next</string>
+
+    <string name="permission_usage_access_title">Usage access permission</string>
+    <string name="permission_usage_access_description">Enable usage acces to use app locker.</string>
+
+    <string name="permission_overlay_title">Lock screen permission</string>
+
+    <string name="settings_card_intruders_title">Catch Intruders</string>
+    <string name="settings_enable_intruders_title">Take intruders picture</string>
+    <string name="settings_enable_intruders_description">Enable to catch intruders.</string>
+
+    <string name="settings_intruders_folder_title">Catched intruder photos</string>
+    <string name="settings_intruders_folder_description">Click to see spies on you phone.</string>
+
+    <!-- Permissions activity -->
+
+    <string name="permission_overlay_description">Enable overlay to show lock screen.</string>
+    <string name="permission_toast_enable_permissions">Enable permissions to use app locker</string>
+
+    <string name="draw_pattern_title">Create a new pattern</string>
+    <string name="redraw_pattern_title">Redraw to complete</string>
+
+    <string name="recreate_pattern_error">Pattern does not match. Redraw.</string>
+
+    <string name="create_pattern_successful">Successfully created.</string>
+    <string name="overlay_prompt_pattern_title">Draw pattern to open app</string>
+    <string name="overlay_prompt_pattern_title_wrong">Wrong pattern. Draw again.</string>
+    <string name="overlay_prompt_pattern_title_correct">Pattern correct.</string>
+
+    <string name="overlay_prompt_fingerprint_title">Draw pattern to open app</string>
+    <string name="overlay_prompt_fingerprint_title_wrong">Not matched. %1$s left.</string>
+    <string name="overlay_prompt_fingerprint_title_correct">Fingerprint matched!</string>
+
+    <string name="overlay_prompt_fingerprint_title_error">Fingerprint error! Try pattern.</string>
+    <string name="dialog_title_rate_us">Did you like SecureBox?</string>
+    <string name="dialog_description_rate_us">We will be sooo happy If you rate us on market.</string>
+    <string name="dialog_action_rate_us_rate">Rate</string>
+
+    <string name="dialog_action_rate_us_later">Later</string>
+    <string name="dialog_title_usage_permission">Android 5.0 Permission</string>
+    <string name="dialog_description_usage_permission">In Android 5.0 or above, you need to permit usage access for
+        AppLocker, so that you can use SecureBox Feature
+    </string>
+    <string name="dialog_action_usage_permission_permit">Permit</string>
+
+    <string name="dialog_action_usage_permission_cancel">Cancel</string>
+    <string name="dialog_title_privacy_policy">Privacy Policy</string>
+    <string name="dialog_description_privacy_policy">We have updated our privacy policy. By continuing you agree the
+        <u>Privacy Policy</u>
+    </string>
+    <string name="dialog_action_privacy_policy_accept">Accept</string>
+
+    <string name="title_main_browser">Browser</string>
+    <string name="title_main_background">Theme</string>
+    <string name="title_main_vault">Vault</string>
+
+    <string name="title_main_call_blocker">Blocker</string>
+    <string name="backgrounds">Backgrounds</string>
+    <string name="hint_browser_search">Search or enter URL</string>
+    <string name="facebook">Facebook</string>
+
+    <string name="twitter">Twitter</string>
+
+    <!-- Browser Activity texts -->
+    <string name="instagram">Instagram</string>
+    <string name="youtube">Youtube</string>
+    <string name="title_browser_empty">Safe.Secure.Private.</string>
+    <string name="subtitle_browser_empty">Surf on the internet. Securely.</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="under_development">Under development. Will be available soon.</string>
+    <string name="title_call_blocker">Call Blocker</string>
+    <string name="title_name_unknown_number">Unknown Number</string>
+
+    <string name="call_blocker_fab_description">Block number</string>
+
+
+    <!-- Call Blocker Activity texts -->
+    <string name="blacklist_empty_title">Blacklist is empty</string>
+    <string name="blacklist_empty_description">Click + to block phone number</string>
+    <string name="call_log_empty_title">No Logs</string>
+
+    <string name="call_log_empty_description">Log appears here when call is blocked</string>
+    <string name="dialog_add_to_blacklist_title">Block phone number</string>
+
+    <string name="dialog_add_to_blacklist_name_hint">Name (Optional)</string>
+    <string name="dialog_add_to_blacklist_phone_hint">Enter phone number</string>
+
+    <string name="dialog_add_to_blacklist_action_block">Block</string>
+    <string name="dialog_add_to_blacklist_action_cancel">Cancel</string>
+    <string name="dialog_black_list_delete_title">Delete from blacklist</string>
+    <string name="dialog_black_list_delete_description">Do you want to remove blocked number from black list?</string>
+    <string name="dialog_black_list_delete_action_delete">Delete</string>
+
+    <string name="dialog_black_list_delete_action_cancel">Cancel</string>
+    <string name="dialog_title_add_to_vault">Processing</string>
+    <string name="dialog_description_process">Your media is removing from gallery and adding to your vault.</string>
+    <string name="dialog_action_process" translatable="false">%d%%</string>
+
+    <string name="dialog_title_removal_confirmation">Removal Confirmation</string>
+    <string name="dialog_description_removal">This file will remove from vault and show into gallery.</string>
+    <string name="dialog_action_removal_confirmation_accept">Accept</string>
+
+    <string name="vault_photo_empty_page_title">Photo Vault is empty</string>
+    <string name="vault_photo_empty_page_description">Add + icon to hide photos from gallery</string>
+    <string name="vault_video_empty_page_title">Video Vault is empty</string>
+
+    <string name="vault_video_empty_page_description">Add + icon to video photos from gallery</string>
+    <string-array name="tabs">
+        <item>Security</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string-array name="call_blocker_tabs">
+        <item>Blacklist</item>
+        <item>Call Logs</item>
+    </string-array>
+    <string-array name="vault_tabs">
+        <item>Images</item>
+        <item>Videos</item>
+    </string-array>
+
+    <!-- Intruders Photo Activity -->
+    <string name="title_intruders_photos">Intruders Photos</string>
+    <string name="empty_page_intruders_title">No Intruders Catched</string>
+    <string name="empty_page_intruders_description">Your phone is secure!</string>
+
+</resources>

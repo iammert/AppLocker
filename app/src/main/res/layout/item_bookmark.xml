@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.browser.bookmarks.BookmarkItemViewState"/>
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_16dp"
+                android:layout_toLeftOf="@+id/cardViewImage">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_medium"
+                    android:fontFamily="@font/avenir_regular"
+                    android:textColor="@color/colorBlack"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="@{viewState.titleText}"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextGrayLight"
+                    android:textSize="@dimen/text_size_medium"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginTop="@dimen/margin_4dp"
+                    android:text="@{viewState.subtitleText}"
+                    android:fontFamily="@font/avenir_regular"/>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewImage"
+                android:layout_width="@dimen/bookmark_item_image_size"
+                android:layout_height="@dimen/bookmark_item_image_size"
+                android:visibility="@{viewState.imageViewVisibility}"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="4dp"
+                android:layout_margin="@dimen/margin_16dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/bookmark_item_image_size"
+                    android:layout_height="@dimen/bookmark_item_image_size"
+                    android:scaleType="centerCrop"
+                    app:url="@{viewState.imageUrl}"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+</layout>

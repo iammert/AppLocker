@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable name="viewState"
+                  type="com.momentolabs.app.security.applocker.ui.security.AppLockItemHeaderViewState"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewHeader"
+                android:layout_width="match_parent"
+                android:textColor="@color/colorTextGray"
+                android:fontFamily="@font/avenir_medium"
+                android:singleLine="true"
+                android:padding="@dimen/margin_16dp"
+                android:textSize="@dimen/text_size_regular"
+                android:text="@{viewState.headerTextResource}"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>

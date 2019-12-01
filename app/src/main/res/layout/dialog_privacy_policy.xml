@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/background_dialog"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+        <View
+                android:layout_width="@dimen/width_dialog_indicator"
+                android:layout_height="@dimen/height_dialog_indicator"
+                android:layout_margin="@dimen/margin_16dp"
+                android:background="@drawable/shape_dialog_indicator"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/avenir_bold"
+                android:text="@string/dialog_title_privacy_policy"
+                android:textColor="@color/colorDialogTitle"
+                android:textSize="@dimen/text_size_regular"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_32dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginRight="@dimen/margin_32dp"
+                android:fontFamily="@font/avenir_regular"
+                android:gravity="center"
+                android:text="@string/dialog_description_privacy_policy"
+                android:textColor="@color/colorDialogTitle"
+                android:textSize="@dimen/text_size_medium"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonAccept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_48dp"
+                android:layout_marginRight="@dimen/margin_48dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/avenir_bold"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_32dp"
+                android:paddingTop="@dimen/margin_16dp"
+                android:paddingRight="@dimen/margin_32dp"
+                android:paddingBottom="@dimen/margin_16dp"
+                android:text="@string/dialog_action_privacy_policy_accept"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_regular"/>
+
+
+    </LinearLayout>
+
+</layout>

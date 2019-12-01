@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewState"
+            type="com.momentolabs.app.security.applocker.ui.vault.vaultlist.VaultListViewState" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewVaultList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="@{viewState.getEmptyPageVisibility()}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@{viewState.getEmptyPageDrawable(context)}" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:fontFamily="@font/avenir_bold"
+                android:text="@{viewState.getEmptyPageTitle(context)}"
+                android:textColor="@color/colorTextGrayLight"
+                android:textSize="@dimen/text_size_medium" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_64dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginRight="@dimen/margin_64dp"
+                android:fontFamily="@font/avenir_regular"
+                android:gravity="center"
+                android:text="@{viewState.getEmptyPageDescription(context)}"
+                android:textColor="@color/colorTextGrayLight"
+                android:textSize="@dimen/text_size_medium" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

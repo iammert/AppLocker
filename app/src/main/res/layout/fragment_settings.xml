@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.momentolabs.app.security.applocker.ui.settings.SettingsViewState" />
+
+        <variable
+            name="fingerPrintStatus"
+            type="com.momentolabs.app.security.applocker.ui.settings.FingerPrintStatusViewState" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_32dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginRight="@dimen/margin_32dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:text="@string/title_general_settings"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_regular" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/margin_32dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingRight="@dimen/margin_32dp"
+                            android:paddingBottom="@dimen/margin_16dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@{viewState.lockAllAppsTitle(context)}"
+                                android:textColor="@color/colorTextGray"
+                                android:textSize="@dimen/text_size_regular" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4dp"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@{viewState.lockAllAppsDescription(context)}"
+                                android:textColor="@color/colorTextGrayLight"
+                                android:textSize="@dimen/text_size_small" />
+
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imageViewLockAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/margin_16dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/margin_16dp"
+                            app:srcCompat="@{viewState.getLockAllAppsIcon(context)}" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutChangePattern"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/margin_32dp"
+                        android:paddingTop="@dimen/margin_16dp"
+                        android:paddingRight="@dimen/margin_32dp"
+                        android:paddingBottom="@dimen/margin_16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_medium"
+                            android:singleLine="true"
+                            android:text="@string/settings_change_pattern_title"
+                            android:textColor="@color/colorTextGray"
+                            android:textSize="@dimen/text_size_regular" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4dp"
+                            android:fontFamily="@font/avenir_medium"
+                            android:singleLine="true"
+                            android:text="@string/settings_change_pattern_description"
+                            android:textColor="@color/colorTextGrayLight"
+                            android:textSize="@dimen/text_size_small" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:id="@+id/layoutStealthMode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/switchStealth"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/margin_32dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingRight="@dimen/margin_32dp"
+                            android:paddingBottom="@dimen/margin_16dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@string/setting_in_stealth_mode_title"
+                                android:textColor="@color/colorTextGray"
+                                android:textSize="@dimen/text_size_regular" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4dp"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@string/setting_in_stealth_mode_description"
+                                android:textColor="@color/colorTextGrayLight"
+                                android:textSize="@dimen/text_size_small" />
+
+                        </LinearLayout>
+
+                        <Switch
+                            android:id="@+id/switchStealth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="@dimen/margin_16dp"
+                            android:checked="@{viewState.hiddenDrawingMode}" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:id="@+id/layoutFingerPrint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/switchFingerPrint"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/margin_32dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingRight="@dimen/margin_32dp"
+                            android:paddingBottom="@dimen/margin_16dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@{fingerPrintStatus.getFingerPrintSettingTitle(context)}"
+                                android:textColor="@color/colorTextGray"
+                                android:textSize="@dimen/text_size_regular" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4dp"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@{fingerPrintStatus.getFingerPrintSettingSubtitle(context)}"
+                                android:textColor="@color/colorTextGrayLight"
+                                android:textSize="@dimen/text_size_small" />
+
+                        </LinearLayout>
+
+                        <Switch
+                            android:id="@+id/switchFingerPrint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="@dimen/margin_16dp"
+                            android:checked="@{viewState.fingerPrintEnabled}"
+                            android:enabled="@{fingerPrintStatus.fingerPrintCheckBoxEnabled}" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_32dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginRight="@dimen/margin_32dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:text="@string/settings_card_intruders_title"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_regular" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:id="@+id/layoutCatchIntruders"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/switchEnableIntrudersCatcher"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/margin_32dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingRight="@dimen/margin_32dp"
+                            android:paddingBottom="@dimen/margin_16dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenir_medium"
+                                android:singleLine="true"
+                                android:text="@string/settings_enable_intruders_title"
+                                android:textColor="@color/colorTextGray"
+                                android:textSize="@dimen/text_size_regular" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4dp"
+                                android:fontFamily="@font/avenir_medium"
+                                android:text="@string/settings_enable_intruders_description"
+                                android:textColor="@color/colorTextGrayLight"
+                                android:textSize="@dimen/text_size_small" />
+
+                        </LinearLayout>
+
+                        <Switch
+                            android:id="@+id/switchEnableIntrudersCatcher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="@dimen/margin_16dp"
+                            android:checked="@{viewState.intrudersCatcherEnabled}" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutIntrudersFolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/margin_32dp"
+                        android:paddingTop="@dimen/margin_16dp"
+                        android:paddingRight="@dimen/margin_32dp"
+                        android:paddingBottom="@dimen/margin_16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_medium"
+                            android:singleLine="true"
+                            android:text="@string/settings_intruders_folder_title"
+                            android:textColor="@color/colorTextGray"
+                            android:textSize="@dimen/text_size_regular" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4dp"
+                            android:fontFamily="@font/avenir_medium"
+                            android:singleLine="true"
+                            android:text="@string/settings_intruders_folder_description"
+                            android:textColor="@color/colorTextGrayLight"
+                            android:textSize="@dimen/text_size_small" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>
