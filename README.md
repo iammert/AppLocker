@@ -8,10 +8,11 @@ I decided to open source my side project SecureBox. I'm sure most of us are suff
 
 # App Features
 * App locker
-* Vault Image/Video file
-* Block call
+* Fingerprint Validation
+* Vault Image/Video file (File Encryption/Decryption)
+* Block call (Blacklist)
 * Private Browser
-* Take intruders photo secretly
+* Take intruders photo secretly (Camera 1 API)
 
 # What can I learn
 * RxJava 2
@@ -19,6 +20,7 @@ I decided to open source my side project SecureBox. I'm sure most of us are suff
 * Room Database
 * ViewModel & LiveData
 * Work Manager
+* FingerPrint API
 * App Usage Stat Manager (Is any app comes to foreground/background)
 * Background & Foreground Services (covers all android versions)
 * MVVM pattern using ViewState
