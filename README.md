@@ -3,6 +3,8 @@
   <img src="https://raw.githubusercontent.com/iammert/AppLocker/master/art/cover.png">
 </p>
 
+[You can download app from Play Store](https://play.google.com/store/apps/details?id=com.momentolabs.app.security.applocker&hl=en)
+
 # App Features
 * App locker
 * Vault Image/Video file
@@ -27,3 +29,7 @@
 * Camera 1 API to take photo without preview.
 * Overlay Activity from background Service
 * more..
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/iammert/AppLocker/master/art/fullcover.png">
+</p>
