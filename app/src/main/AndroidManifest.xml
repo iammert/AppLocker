@@ -114,16 +114,8 @@
         </service>
 
         <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <meta-data
             android:name="com.bugsnag.android.API_KEY"
             android:value="ebbfbab41a7d4b9865f3baefba6a24ce" />
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/mobile_ad_id"/>
     </application>
 
 </manifest>

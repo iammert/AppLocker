@@ -9,7 +9,6 @@ import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.DialogPrivacyPolicyBinding
 import com.momentolabs.app.security.applocker.ui.BaseBottomSheetDialog
 import com.momentolabs.app.security.applocker.ui.permissions.IntentHelper
-import com.momentolabs.app.security.applocker.ui.policydialog.analytics.PrivacyPolicyAnalytics
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 
 class PrivacyPolicyDialog : BaseBottomSheetDialog<PrivacyPolicyViewModel>() {
@@ -20,7 +19,6 @@ class PrivacyPolicyDialog : BaseBottomSheetDialog<PrivacyPolicyViewModel>() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding.buttonAccept.setOnClickListener {
-            activity?.let { PrivacyPolicyAnalytics.sendPrivacyPolicyAccept(it) }
             viewModel.acceptPrivacyPolicy()
             dismiss()
         }

@@ -94,10 +94,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
 
-    implementation 'com.facebook.android:facebook-core:4.41.0'
-
-    implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     implementation 'com.daimajia.easing:library:2.0@aar'
@@ -113,8 +109,6 @@ dependencies {
     implementation 'com.facebook.conceal:conceal:2.0.2'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 
-    implementation 'com.google.firebase:firebase-ads:18.2.0'
-
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
     kapt 'com.google.dagger:dagger-compiler:2.22.1'
@@ -122,5 +116,3 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha05"
     kapt "androidx.room:room-compiler:2.2.0-rc01"
 }
-
-apply plugin: 'com.google.gms.google-services'

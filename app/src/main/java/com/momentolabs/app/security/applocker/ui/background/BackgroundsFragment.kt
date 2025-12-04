@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.FragmentBackgroundsBinding
 import com.momentolabs.app.security.applocker.ui.BaseFragment
-import com.momentolabs.app.security.applocker.ui.background.analytics.BackgroundAnalytics
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 
 class BackgroundsFragment : BaseFragment<BackgroundsFragmentViewModel>() {
@@ -35,7 +34,6 @@ class BackgroundsFragment : BaseFragment<BackgroundsFragmentViewModel>() {
 
     private fun onBackgroundItemSelected(selectedItemViewState: GradientItemViewState) {
         viewModel.onSelectedItemChanged(selectedItemViewState)
-        activity?.let { BackgroundAnalytics.sendBackgroundChangedEvent(it, selectedItemViewState.id) }
     }
 
     companion object {

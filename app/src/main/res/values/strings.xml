@@ -4,13 +4,6 @@
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
-    <!-- AD unit ids-->
-    <string name="mobile_ad_id" translatable="false">ca-app-pub-7878654882882088~4416828367</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/5538338345</string>
-    <string name="overlay_banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/8597237218</string>
-    <string name="dashboard_banner_ad_unit_id" translatable="false">ca-app-pub-7878654882882088/9894092735</string>
-
-
     <string name="share">Share</string>
     <string name="rate">Rate us</string>
     <string name="feedback">Feedback</string>

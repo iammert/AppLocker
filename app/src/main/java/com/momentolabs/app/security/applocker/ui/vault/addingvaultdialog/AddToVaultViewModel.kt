@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.crashlytics.android.Crashlytics
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
 import com.momentolabs.app.security.applocker.repository.VaultRepository
 import com.momentolabs.app.security.applocker.ui.RxAwareAndroidViewModel

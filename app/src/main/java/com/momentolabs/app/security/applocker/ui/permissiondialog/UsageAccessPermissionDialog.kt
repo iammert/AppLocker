@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.DialogUsagePermissionBinding
 import com.momentolabs.app.security.applocker.ui.BaseBottomSheetDialog
-import com.momentolabs.app.security.applocker.ui.permissiondialog.analytics.PermissionDialogAnayltics
 import com.momentolabs.app.security.applocker.ui.permissions.IntentHelper
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 
@@ -20,11 +19,9 @@ class UsageAccessPermissionDialog : BaseBottomSheetDialog<UsageAccessPermissionV
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding.buttonPermit.setOnClickListener {
-            activity?.let { PermissionDialogAnayltics.usagePermissionPermitClicked(it) }
             onPermitClicked()
         }
         binding.buttonCancel.setOnClickListener {
-            activity?.let { PermissionDialogAnayltics.usagePermissionCancelClicked(it) }
             dismiss()
         }
         return binding.root

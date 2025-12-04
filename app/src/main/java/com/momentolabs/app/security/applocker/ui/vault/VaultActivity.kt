@@ -8,16 +8,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.ads.*
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
 import com.momentolabs.app.security.applocker.databinding.ActivityVaultBinding
 import com.momentolabs.app.security.applocker.ui.BaseActivity
 import com.momentolabs.app.security.applocker.ui.rateus.RateUsDialog
 import com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog.AddToVaultDialog
-import com.momentolabs.app.security.applocker.ui.vault.analytics.VaultAdAnalytics
 import com.momentolabs.app.security.applocker.ui.vault.intent.VaultSelectorIntentHelper
-import com.momentolabs.app.security.applocker.util.ads.AdTestDevices
 import com.momentolabs.app.security.applocker.util.helper.file.FilePathHelper
 import com.tbruyelle.rxpermissions2.RxPermissions
 
@@ -37,8 +34,6 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
         binding.tabLayoutVault.setupWithViewPager(binding.viewPagerVault)
         binding.imageViewBack.setOnClickListener { finish() }
         binding.buttonAddToVault.setOnClickListener { addToVaultClicked() }
-
-        showBannerAd()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -113,36 +108,6 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
         }
     }
 
-    private fun showBannerAd() {
-        MobileAds.initialize(this)
-        val mAdView = AdView(this).apply {
-            adSize = AdSize.BANNER
-            adUnitId = getString(R.string.banner_ad_unit_id)
-            adListener = object : AdListener() {
-                override fun onAdClicked() {
-                    super.onAdClicked()
-                    VaultAdAnalytics.bannerAdClicked(this@VaultActivity)
-                }
-
-                override fun onAdFailedToLoad(p0: Int) {
-                    super.onAdFailedToLoad(p0)
-                    VaultAdAnalytics.bannerAdFailed(this@VaultActivity)
-                }
-
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                    VaultAdAnalytics.bannerAdLoaded(this@VaultActivity)
-                }
-            }
-        }
-
-        binding.adContainer.addView(mAdView)
-        val adRequestBuilder = AdRequest.Builder()
-        AdTestDevices.DEVICES.forEach {
-            adRequestBuilder.addTestDevice(it)
-        }
-        mAdView.loadAd(adRequestBuilder.build())
-    }
 
     companion object {
 

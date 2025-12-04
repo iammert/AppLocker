@@ -14,7 +14,6 @@ import com.momentolabs.app.security.applocker.ui.BaseActivity
 import android.webkit.*
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.data.database.bookmark.BookmarkEntity
-import com.momentolabs.app.security.applocker.ui.browser.analytics.BrowserAnalytics
 import com.momentolabs.app.security.applocker.ui.browser.bookmarks.BookmarksDialog
 import com.momentolabs.app.security.applocker.ui.browser.resolver.UrlResolver.FACEBOOK
 import com.momentolabs.app.security.applocker.ui.browser.resolver.UrlResolver.INSTAGRAM
@@ -66,22 +65,18 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
 
         binding.layoutFacebook.setOnClickListener {
             viewModel.load(FACEBOOK)
-            BrowserAnalytics.sendQuickBrowsingClicked(this, FACEBOOK)
         }
 
         binding.layoutInstagram.setOnClickListener {
             viewModel.load(INSTAGRAM)
-            BrowserAnalytics.sendQuickBrowsingClicked(this, INSTAGRAM)
         }
 
         binding.layoutTwitter.setOnClickListener {
             viewModel.load(TWITTER)
-            BrowserAnalytics.sendQuickBrowsingClicked(this, TWITTER)
         }
 
         binding.layoutYoutube.setOnClickListener {
             viewModel.load(YOUTUBE)
-            BrowserAnalytics.sendQuickBrowsingClicked(this, YOUTUBE)
         }
 
         binding.imageViewBookmarks.setOnClickListener {

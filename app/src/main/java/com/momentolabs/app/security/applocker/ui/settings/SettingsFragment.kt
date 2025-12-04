@@ -17,7 +17,6 @@ import com.momentolabs.app.security.applocker.ui.intruders.IntrudersPhotosActivi
 import com.momentolabs.app.security.applocker.ui.newpattern.CreateNewPatternActivity
 import com.momentolabs.app.security.applocker.ui.permissiondialog.UsageAccessPermissionDialog
 import com.momentolabs.app.security.applocker.ui.permissions.PermissionChecker
-import com.momentolabs.app.security.applocker.ui.settings.analytics.SettingsAnalytics
 import com.momentolabs.app.security.applocker.ui.vault.VaultActivity
 import com.momentolabs.app.security.applocker.ui.vault.intent.VaultSelectorIntentHelper
 import com.momentolabs.app.security.applocker.util.delegate.inflate
@@ -62,22 +61,18 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
         }
 
         binding.switchFingerPrint.setOnCheckedChangeListener { buttonView, isChecked ->
-            activity?.let { SettingsAnalytics.fingerPrintEnabled(it) }
             viewModel.setEnableFingerPrint(isChecked)
         }
 
         binding.switchEnableIntrudersCatcher.setOnCheckedChangeListener { buttonView, isChecked ->
-            activity?.let { SettingsAnalytics.intrudersEnabled(it) }
             enableIntrudersCatcher(isChecked)
         }
 
         binding.layoutIntrudersFolder.setOnClickListener {
             activity?.let {
                 if (viewModel.isIntrudersCatcherEnabled().not()) {
-                    activity?.let { SettingsAnalytics.intrudersEnabled(it) }
                     enableIntrudersCatcher(true)
                 } else {
-                    SettingsAnalytics.intrudersFolderClicked(it)
                     startActivity(IntrudersPhotosActivity.newIntent(it))
                 }
             }

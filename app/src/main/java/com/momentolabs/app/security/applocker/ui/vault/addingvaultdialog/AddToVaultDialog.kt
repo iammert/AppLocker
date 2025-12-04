@@ -11,7 +11,6 @@ import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType.TYPE_VIDEO
 import com.momentolabs.app.security.applocker.databinding.DialogAddToVaultBinding
 import com.momentolabs.app.security.applocker.ui.BaseBottomSheetDialog
-import com.momentolabs.app.security.applocker.ui.vault.analytics.VaultAnalytics
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 
 class AddToVaultDialog : BaseBottomSheetDialog<AddToVaultViewModel>() {
@@ -39,19 +38,6 @@ class AddToVaultDialog : BaseBottomSheetDialog<AddToVaultViewModel>() {
             if (viewState.processState == ProcessState.COMPLETE) {
                 onDismissListener?.invoke()
                 dismiss()
-
-                when (mediaType) {
-                    TYPE_IMAGE -> activity?.let { activity ->
-                        filePath?.let { list ->
-                            VaultAnalytics.addedImageVault(activity, list.size)
-                        }
-                    }
-                    TYPE_VIDEO -> activity?.let { activity ->
-                        filePath?.let { list ->
-                            VaultAnalytics.addedVideoVault(activity, list.size)
-                        }
-                    }
-                }
             }
         })
 

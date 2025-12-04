@@ -2,7 +2,6 @@ package com.momentolabs.app.security.applocker.repository
 
 import android.content.Context
 import com.crashlytics.android.Crashlytics
-import com.google.android.gms.measurement.module.Analytics
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaDao
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaEntity
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType

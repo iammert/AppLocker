@@ -92,13 +92,6 @@
                 app:backgroundTint="@color/color_vault"
                 app:fabSize="normal"
                 app:srcCompat="@drawable/ic_add_white_24dp" />
-
-            <RelativeLayout
-                android:id="@+id/adContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-
         </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

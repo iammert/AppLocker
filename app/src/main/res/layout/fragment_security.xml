@@ -22,15 +22,8 @@
             android:background="@color/white"
             android:clipToPadding="false"
             android:paddingTop="@dimen/security_recyclerview_padding_top"
-            android:layout_above="@+id/adLayout"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <RelativeLayout
-            android:id="@+id/adLayout"
-            android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </RelativeLayout>
 </layout>

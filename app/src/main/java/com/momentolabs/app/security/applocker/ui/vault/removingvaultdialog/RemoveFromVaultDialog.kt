@@ -13,7 +13,6 @@ import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
 import com.momentolabs.app.security.applocker.databinding.DialogRemoveFromVaultBinding
 import com.momentolabs.app.security.applocker.ui.BaseBottomSheetDialog
 import com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog.ProcessState
-import com.momentolabs.app.security.applocker.ui.vault.analytics.VaultAnalytics
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 import com.momentolabs.app.security.applocker.util.encryptor.CryptoProcess
 
@@ -43,15 +42,6 @@ class RemoveFromVaultDialog : BaseBottomSheetDialog<RemoveFromVaultViewModel>() 
 
             if (viewState.processState == ProcessState.COMPLETE) {
                 dismiss()
-
-                vaultMediaEntity?.mediaType?.let {
-                    when (it) {
-                        TYPE_IMAGE.mediaType -> activity?.let { VaultAnalytics.removedImageVault(it) }
-                        TYPE_VIDEO.mediaType -> activity?.let { VaultAnalytics.removedVideoVault(it) }
-                        else -> {
-                        }
-                    }
-                }
             }
         })
 
