@@ -1,9 +1,9 @@
 package com.momentolabs.app.security.applocker.ui.vault.removingvaultdialog
 
+import com.momentolabs.app.security.applocker.util.helper.ErrorLogger
 import android.app.Application
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData
-import com.crashlytics.android.Crashlytics
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaEntity
 import com.momentolabs.app.security.applocker.repository.VaultRepository
 import com.momentolabs.app.security.applocker.ui.RxAwareAndroidViewModel
@@ -63,7 +63,7 @@ class RemoveFromVaultViewModel @Inject constructor(
                         is CryptoProcess.Complete -> fakeProgress.complete()
                     }
                 },
-                { Crashlytics.logException(it) })
+                { ErrorLogger.log(it) })
     }
 
     fun getRemoveFromVaultViewStateLiveData() = removeFromVaultViewStateLiveData

@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.fabric'
-apply plugin: 'com.bugsnag.android.gradle'
 
 def configuration = rootProject.ext.configuration
 
@@ -94,7 +92,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
 
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
@@ -105,11 +102,8 @@ dependencies {
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.2.0'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
-    implementation 'com.bugsnag:bugsnag-android:4.13.0'
     implementation 'com.facebook.conceal:conceal:2.0.2'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-
-    implementation 'com.facebook.stetho:stetho:1.5.1'
 
     kapt 'com.google.dagger:dagger-compiler:2.22.1'
     kapt 'com.google.dagger:dagger-android-processor:2.22.1'

@@ -1,7 +1,7 @@
 package com.momentolabs.app.security.applocker.repository
 
+import com.momentolabs.app.security.applocker.util.helper.ErrorLogger
 import android.content.Context
-import com.crashlytics.android.Crashlytics
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaDao
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaEntity
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
@@ -119,7 +119,7 @@ class VaultRepository @Inject constructor(
                         }
                     },
                     {
-                        Crashlytics.logException(it)
+                        ErrorLogger.log(it)
                         emitter.onComplete()
                     })
 

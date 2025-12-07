@@ -112,10 +112,6 @@
                 <action android:name="android.telecom.CallScreeningService" />
             </intent-filter>
         </service>
-
-        <meta-data
-            android:name="com.bugsnag.android.API_KEY"
-            android:value="ebbfbab41a7d4b9865f3baefba6a24ce" />
     </application>
 
 </manifest>

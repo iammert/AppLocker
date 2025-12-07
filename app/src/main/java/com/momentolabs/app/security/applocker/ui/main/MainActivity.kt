@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.crashlytics.android.Crashlytics
 import com.google.android.material.tabs.TabLayout
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.ActivityMainBinding
