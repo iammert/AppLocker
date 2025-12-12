@@ -1,0 +1,26 @@
+// Pattern lock view by Aritra Roy (https://github.com/aritraroy/PatternLockView),
+// Apache License 2.0. The library is no longer published since JCenter shut down,
+// so its sources live here, migrated to AndroidX.
+plugins {
+    alias(libs.plugins.android.library)
+}
+
+android {
+    namespace = 'com.andrognito.patternlockview'
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 23
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation libs.androidx.annotation
+    implementation libs.androidx.core.ktx
+}
