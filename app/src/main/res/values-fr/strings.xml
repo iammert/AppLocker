@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Motif correct.</string>
 
     <string name="overlay_prompt_fingerprint_title">Dessiner un motif pour ouvrir l\'application</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Pas adapté. %1$s reste.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Empreinte digitale assortie!</string>
+    <string name="overlay_use_pattern">Utiliser le schéma</string>
     <string name="overlay_prompt_fingerprint_title_error">Erreur d\'empreinte digitale! Essayez le modèle.</string>
 
     <string name="dialog_title_rate_us">Vous avez aimé SecureBox?</string>

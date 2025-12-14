@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">पैटर्न सही है।</string>
 
     <string name="overlay_prompt_fingerprint_title">ऐप खोलने के लिए पैटर्न ड्रा करें</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">मिलान नही हुआ। %1$s बचे हैं।</string>
     <string name="overlay_prompt_fingerprint_title_correct">फिंगरप्रिंट मिलान!</string>
+    <string name="overlay_use_pattern">पैटर्न का उपयोग करें</string>
     <string name="overlay_prompt_fingerprint_title_error">फ़िंगरप्रिंट त्रुटि! पैटर्न आजमाएं।</string>
 
     <string name="dialog_title_rate_us">क्या आपको सिक्योरबॉक्स पसंद है?</string>

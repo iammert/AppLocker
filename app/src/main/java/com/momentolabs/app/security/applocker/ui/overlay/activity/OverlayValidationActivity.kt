@@ -31,6 +31,8 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
 
     private lateinit var binding: ActivityOverlayValidationBinding
 
+    private var biometricAuthenticator: BiometricAuthenticator? = null
+
     override fun getViewModel(): Class<OverlayValidationViewModel> =
         OverlayValidationViewModel::class.java
 
@@ -41,6 +43,10 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
         updateLaunchingAppIcon(intent.getStringExtra(KEY_PACKAGE_NAME))
 
         frontPictureLiveData = FrontPictureLiveData(application, viewModel.getIntruderPictureImageFile())
+
+        if (viewModel.isFingerPrintEnabled()) {
+            biometricAuthenticator = BiometricAuthenticator(this, viewModel::onFingerPrintResult)
+        }
 
         viewModel.getViewStateObservable().observe(this, Observer {
             binding.patternLockView.clearPattern()
@@ -87,6 +93,16 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
         finish()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        biometricAuthenticator?.authenticate()
+    }
+
+    override fun onPause() {
+        biometricAuthenticator?.cancel()
+        super.onPause()
+    }
 
     private fun updateLaunchingAppIcon(appPackageName: String) {
         try {

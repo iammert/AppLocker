@@ -1,6 +1,7 @@
 package com.momentolabs.app.security.applocker.ui.settings
 
 import android.app.Application
+import androidx.biometric.BiometricManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.momentolabs.app.security.applocker.data.AppDataProvider
@@ -11,7 +12,7 @@ import com.momentolabs.app.security.applocker.ui.RxAwareAndroidViewModel
 import com.momentolabs.app.security.applocker.ui.RxAwareViewModel
 import com.momentolabs.app.security.applocker.util.extensions.doOnBackground
 import com.momentolabs.app.security.applocker.util.extensions.plusAssign
-import com.wei.android.lib.fingerprintidentify.FingerprintIdentify
+import com.momentolabs.app.security.applocker.ui.overlay.activity.BiometricAuthenticator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -33,13 +34,12 @@ class SettingsViewModel @Inject constructor(
 
     private val fingerPrintStatusViewStateLiveData = MutableLiveData<FingerPrintStatusViewState>()
         .apply {
-            with(FingerprintIdentify(app)) {
-                init()
-                value = FingerPrintStatusViewState(
-                    isFingerPrintSupported = isHardwareEnable,
-                    isFingerPrintRegistered = isRegisteredFingerprint
-                )
-            }
+            val status = BiometricAuthenticator.canAuthenticate(app)
+            value = FingerPrintStatusViewState(
+                isFingerPrintSupported = status == BiometricManager.BIOMETRIC_SUCCESS ||
+                        status == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED,
+                isFingerPrintRegistered = status == BiometricManager.BIOMETRIC_SUCCESS
+            )
         }
 
     init {

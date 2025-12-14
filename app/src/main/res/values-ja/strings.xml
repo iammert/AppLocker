@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">パターンが正しい。</string>
 
     <string name="overlay_prompt_fingerprint_title">パターンを描いてアプリを開く</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">一致しません。残り %1$s。</string>
     <string name="overlay_prompt_fingerprint_title_correct">指紋が一致しました！</string>
+    <string name="overlay_use_pattern">パターンを使用</string>
     <string name="overlay_prompt_fingerprint_title_error">指紋エラー！パターンを試してください。</string>
 
     <string name="dialog_title_rate_us">SecureBoxが気に入りましたか？</string>

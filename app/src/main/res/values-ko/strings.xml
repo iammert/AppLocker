@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">패턴이 정확합니다.</string>
 
     <string name="overlay_prompt_fingerprint_title">앱을 열기위한 패턴 그리기</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">일치하지 않습니다. %1$s 남음</string>
     <string name="overlay_prompt_fingerprint_title_correct">지문 일치!</string>
+    <string name="overlay_use_pattern">패턴 사용</string>
     <string name="overlay_prompt_fingerprint_title_error">지문 오류! 패턴을보십시오.</string>
 
     <string name="dialog_title_rate_us">SecureBox를 좋아했습니까?</string>

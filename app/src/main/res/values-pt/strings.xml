@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Padrão correto.</string>
 
     <string name="overlay_prompt_fingerprint_title">Desenhar padrão para abrir o aplicativo</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Não correspondido. %1$s restantes.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Impressão digital combinada!</string>
+    <string name="overlay_use_pattern">Usar padrão</string>
     <string name="overlay_prompt_fingerprint_title_error">Erro de impressão digital! Tente o padrão.</string>
 
     <string name="dialog_title_rate_us">Você gostou do SecureBox?</string>

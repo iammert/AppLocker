@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Muster richtig.</string>
 
     <string name="overlay_prompt_fingerprint_title">Muster zeichnen, um die App zu öffnen</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Nicht passend. %1$s übrig.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Fingerabdruck abgestimmt!</string>
+    <string name="overlay_use_pattern">Muster verwenden</string>
     <string name="overlay_prompt_fingerprint_title_error">Fingerabdruckfehler! Versuchen Sie es mit einem Muster.</string>
 
     <string name="dialog_title_rate_us">Hat dir SecureBox gefallen?</string>

@@ -96,7 +96,7 @@ dependencies {
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
-    implementation 'com.wei.android.lib:fingerprintidentify:1.2.6'
+    implementation 'androidx.biometric:biometric:1.1.0'
     implementation 'com.github.iammert:beaver:1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.2.0'

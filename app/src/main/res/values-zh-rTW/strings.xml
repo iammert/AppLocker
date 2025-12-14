@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">模式正確。</string>
 
     <string name="overlay_prompt_fingerprint_title">繪製模式以打開應用程序</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">不匹配。剩下 %1$s。</string>
     <string name="overlay_prompt_fingerprint_title_correct">指紋匹配！</string>
+    <string name="overlay_use_pattern">使用圖形</string>
     <string name="overlay_prompt_fingerprint_title_error">指紋錯誤！嘗試模式。</string>
 
     <string name="dialog_title_rate_us">你喜歡SecureBox嗎？</string>

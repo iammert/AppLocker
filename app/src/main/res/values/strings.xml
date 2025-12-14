@@ -80,9 +80,9 @@
     <string name="overlay_prompt_pattern_title_correct">Pattern correct.</string>
 
     <string name="overlay_prompt_fingerprint_title">Draw pattern to open app</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Not matched. %1$s left.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Fingerprint matched!</string>
 
+    <string name="overlay_use_pattern">Use pattern</string>
     <string name="overlay_prompt_fingerprint_title_error">Fingerprint error! Try pattern.</string>
     <string name="dialog_title_rate_us">Did you like SecureBox?</string>
     <string name="dialog_description_rate_us">We will be sooo happy If you rate us on market.</string>

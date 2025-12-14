@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Візерунок правильний.</string>
 
     <string name="overlay_prompt_fingerprint_title">Намалюйте візерунок, щоб відкрити додаток</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Не збігаються. Залишилось %1$s.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Відбитки пальців збігаються!</string>
+    <string name="overlay_use_pattern">Використати графічний ключ</string>
     <string name="overlay_prompt_fingerprint_title_error">Помилка відбитків пальців! Спробуйте шаблон.</string>
 
     <string name="dialog_title_rate_us">Вам сподобався SecureBox?</string>

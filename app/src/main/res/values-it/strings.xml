@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Pattern corretto.</string>
 
     <string name="overlay_prompt_fingerprint_title">Disegna modello per aprire l\'app</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Non abbinato %1$s rimanenti.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Impronta digitale abbinata!</string>
+    <string name="overlay_use_pattern">Usa sequenza</string>
     <string name="overlay_prompt_fingerprint_title_error">Errore dell\'impronta digitale! Prova il modello.</string>
 
     <string name="dialog_title_rate_us">Ti è piaciuto SecureBox?</string>

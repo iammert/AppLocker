@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Desen doğru.</string>
 
     <string name="overlay_prompt_fingerprint_title">Uygulamayı açmak için desen çizin</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Eşleşmedi. %1$s kaldı.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Parmak izi eşleşti!</string>
+    <string name="overlay_use_pattern">Deseni kullan</string>
     <string name="overlay_prompt_fingerprint_title_error">Parmak izi hatası! Desen deneyin.</string>
 
     <string name="dialog_title_rate_us">SecureBox hoşunuza gitti mi?</string>

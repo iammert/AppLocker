@@ -44,8 +44,6 @@ class OverlayValidationViewModel @Inject constructor(
 
     private val selectedBackgroundDrawableLiveData = MutableLiveData<GradientItemViewState>()
 
-    private val fingerPrintLiveData = FingerPrintLiveData(getApplication())
-
     private val patternDrawnSubject = PublishSubject.create<List<PatternDot>>()
 
     init {
@@ -69,16 +67,6 @@ class OverlayValidationViewModel @Inject constructor(
                     )
             }
 
-        patternValidationViewStateLiveData.addSource(fingerPrintLiveData) {
-            patternValidationViewStateLiveData.value = OverlayViewState(
-                overlayValidateType = OverlayValidateType.TYPE_FINGERPRINT,
-                fingerPrintResultData = it,
-                isHiddenDrawingMode = appLockerPreferences.getHiddenDrawingMode(),
-                isIntrudersCatcherMode = appLockerPreferences.getIntrudersCatcherEnabled(),
-                isFingerPrintMode = appLockerPreferences.getFingerPrintEnabled()
-            )
-        }
-
         val selectedBackgroundId = appLockerPreferences.getSelectedBackgroundId()
         GradientBackgroundDataProvider.gradientViewStateList.forEach {
             if (it.id == selectedBackgroundId) {
@@ -91,6 +79,18 @@ class OverlayValidationViewModel @Inject constructor(
 
     fun getBackgroundDrawableLiveData(): LiveData<GradientItemViewState> =
         selectedBackgroundDrawableLiveData
+
+    fun isFingerPrintEnabled(): Boolean = appLockerPreferences.getFingerPrintEnabled()
+
+    fun onFingerPrintResult(result: FingerPrintResultData) {
+        patternValidationViewStateLiveData.value = OverlayViewState(
+            overlayValidateType = OverlayValidateType.TYPE_FINGERPRINT,
+            fingerPrintResultData = result,
+            isHiddenDrawingMode = appLockerPreferences.getHiddenDrawingMode(),
+            isIntrudersCatcherMode = appLockerPreferences.getIntrudersCatcherEnabled(),
+            isFingerPrintMode = appLockerPreferences.getFingerPrintEnabled()
+        )
+    }
 
     fun onPatternDrawn(pattern: List<PatternDot>) {
         patternDrawnSubject.onNext(pattern)

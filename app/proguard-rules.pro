@@ -21,14 +21,7 @@
 -renamesourcefileattribute SourceFile
 
 
-## FINGERPRINT
 -ignorewarnings
-
-# MeiZuFingerprint
--keep class com.fingerprints.service.** { *; }
-
-# SmsungFingerprint
--keep class com.samsung.android.sdk.** { *; }
 
 -keep class org.ocpsoft.prettytime.i18n.**
 

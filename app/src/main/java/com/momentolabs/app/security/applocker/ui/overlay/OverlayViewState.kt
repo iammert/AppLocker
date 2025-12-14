@@ -28,10 +28,7 @@ data class OverlayViewState(
             TYPE_FINGERPRINT -> {
                 when (fingerPrintResultData?.fingerPrintResult) {
                     SUCCESS -> context.getString(R.string.overlay_prompt_fingerprint_title_correct)
-                    NOT_MATCHED -> context.getString(
-                        R.string.overlay_prompt_fingerprint_title_wrong,
-                        fingerPrintResultData.availableTimes.toString()
-                    )
+                    NOT_MATCHED -> context.getString(R.string.overlay_prompt_fingerprint_title)
                     ERROR -> context.getString(R.string.overlay_prompt_fingerprint_title_error)
                     else -> context.getString(R.string.overlay_prompt_fingerprint_title)
                 }

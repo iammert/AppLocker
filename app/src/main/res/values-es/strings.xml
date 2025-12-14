@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Patrón correcto</string>
 
     <string name="overlay_prompt_fingerprint_title">Dibujar patrón para abrir la aplicación</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">No coinciden. Queda %1$s.</string>
     <string name="overlay_prompt_fingerprint_title_correct">¡Huella digital combinada!</string>
+    <string name="overlay_use_pattern">Usar patrón</string>
     <string name="overlay_prompt_fingerprint_title_error">Error de huella digital! Prueba patrón.</string>
 
     <string name="dialog_title_rate_us">¿Te ha gustado SecureBox?</string>

@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Pola benar.</string>
 
     <string name="overlay_prompt_fingerprint_title">Gambar pola untuk membuka aplikasi</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Tidak cocok. %1$s tersisa.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Sidik jari cocok!</string>
+    <string name="overlay_use_pattern">Gunakan pola</string>
     <string name="overlay_prompt_fingerprint_title_error">Kesalahan sidik jari! Coba pola.</string>
 
     <string name="dialog_title_rate_us">Apakah Anda suka SecureBox?</string>

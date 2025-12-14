@@ -4,7 +4,6 @@ import com.momentolabs.app.security.applocker.ui.overlay.activity.FingerPrintRes
 
 data class FingerPrintResultData(
     val fingerPrintResult: FingerPrintResult,
-    val availableTimes: Int = 0,
     val errorMessage: String = ""
 ) {
 
@@ -16,10 +15,7 @@ data class FingerPrintResultData(
 
         fun matched() = FingerPrintResultData(SUCCESS)
 
-        fun notMatched(availableTimes: Int) = FingerPrintResultData(
-            fingerPrintResult = NOT_MATCHED,
-            availableTimes = availableTimes
-        )
+        fun notMatched() = FingerPrintResultData(fingerPrintResult = NOT_MATCHED)
 
         fun error(errorMessage: String) =
             FingerPrintResultData(

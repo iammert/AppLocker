@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">Образец правильный.</string>
 
     <string name="overlay_prompt_fingerprint_title">Нарисуйте шаблон, чтобы открыть приложение</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">Не соответствует. Осталось %1$s.</string>
     <string name="overlay_prompt_fingerprint_title_correct">Отпечаток пальца совпадает!</string>
+    <string name="overlay_use_pattern">Использовать графический ключ</string>
     <string name="overlay_prompt_fingerprint_title_error">Ошибка отпечатка пальца! Попробуйте шаблон.</string>
 
     <string name="dialog_title_rate_us">Вам понравился SecureBox?</string>

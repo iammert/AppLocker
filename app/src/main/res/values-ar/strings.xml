@@ -86,8 +86,8 @@
     <string name="overlay_prompt_pattern_title_correct">نمط صحيح.</string>
 
     <string name="overlay_prompt_fingerprint_title">رسم نمط لفتح التطبيق</string>
-    <string name="overlay_prompt_fingerprint_title_wrong">غير متطابق. غادر٪ %1$s</string>
     <string name="overlay_prompt_fingerprint_title_correct">بصمة المتطابقة!</string>
+    <string name="overlay_use_pattern">استخدام النمط</string>
     <string name="overlay_prompt_fingerprint_title_error">خطأ بصمة! حاول نمط.</string>
 
     <string name="dialog_title_rate_us">هل أعجبك SecureBox؟</string>
