@@ -10,7 +10,6 @@ import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.DialogCallBlockerAddToBlacklistBinding
 import com.momentolabs.app.security.applocker.ui.BaseBottomSheetDialog
 import com.momentolabs.app.security.applocker.util.delegate.inflate
-import kotlinx.android.synthetic.main.dialog_call_blocker_add_to_blacklist.*
 
 class AddToBlackListDialog : BaseBottomSheetDialog<AddToBlackListViewModel>() {
 
@@ -21,7 +20,7 @@ class AddToBlackListDialog : BaseBottomSheetDialog<AddToBlackListViewModel>() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding.buttonBlock.setOnClickListener {
             if (validateInputFields()) {
-                viewModel.blockNumber(editTextName.text.toString(), editTextPhoneNumber.text.toString())
+                viewModel.blockNumber(binding.editTextName.text.toString(), binding.editTextPhoneNumber.text.toString())
             }
         }
         binding.buttonCancel.setOnClickListener {

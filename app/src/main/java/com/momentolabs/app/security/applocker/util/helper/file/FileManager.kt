@@ -50,7 +50,7 @@ class FileManager @Inject constructor(val context: Context) {
 
         Log.v("TEST", "files : ${folder.absolutePath}")
         val files = folder.listFiles() ?: arrayOf()
-        return files.filter { it.name.toLowerCase().endsWith(extension.extension.toLowerCase()) }
+        return files.filter { it.name.lowercase().endsWith(extension.extension.lowercase()) }
     }
 
     fun createFileInCache(fileName: String): File {

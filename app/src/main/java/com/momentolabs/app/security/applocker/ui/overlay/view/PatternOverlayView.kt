@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import com.andrognito.patternlockview.PatternLockView
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
+import com.momentolabs.app.security.applocker.util.extensions.shake
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.ViewPatternOverlayBinding
 import com.momentolabs.app.security.applocker.ui.newpattern.SimplePatternListener
@@ -58,9 +57,7 @@ class PatternOverlayView @JvmOverloads constructor(
                 overlayValidateType = OverlayValidateType.TYPE_PATTERN,
                 isDrawnCorrect = false
             )
-        YoYo.with(Techniques.Shake)
-            .duration(700)
-            .playOn(binding.textViewPrompt)
+        binding.textViewPrompt.shake()
     }
 
     fun notifyDrawnCorrect() {

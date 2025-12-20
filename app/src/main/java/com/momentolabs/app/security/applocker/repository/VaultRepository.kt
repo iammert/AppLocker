@@ -197,6 +197,7 @@ class VaultRepository @Inject constructor(
                             subscriber.onNext(vaultMediaEntity)
                             subscriber.onComplete()
                         }
+                        is CryptoProcess.Processing -> Unit
                     }
                 }
         }, BackpressureStrategy.DROP)

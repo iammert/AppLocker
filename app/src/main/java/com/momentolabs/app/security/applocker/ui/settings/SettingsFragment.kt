@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,6 @@ import com.momentolabs.app.security.applocker.ui.vault.VaultActivity
 import com.momentolabs.app.security.applocker.ui.vault.intent.VaultSelectorIntentHelper
 import com.momentolabs.app.security.applocker.util.delegate.inflate
 import com.momentolabs.app.security.applocker.util.extensions.toast
-import com.tbruyelle.rxpermissions2.RxPermissions
 
 class SettingsFragment : BaseFragment<SettingsViewModel>() {
 
@@ -104,14 +104,16 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
         }
     }
 
-    @SuppressLint("CheckResult")
+    private val intrudersPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            viewModel.setEnableIntrudersCatchers(results.values.all { it })
+        }
+
     private fun enableIntrudersCatcher(isChecked: Boolean) {
         if (isChecked) {
-            RxPermissions(this)
-                .request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe { granted ->
-                    viewModel.setEnableIntrudersCatchers(granted)
-                }
+            intrudersPermissionLauncher.launch(
+                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            )
         } else {
             viewModel.setEnableIntrudersCatchers(false)
         }

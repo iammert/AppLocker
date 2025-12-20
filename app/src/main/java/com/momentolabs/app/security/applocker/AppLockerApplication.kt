@@ -1,7 +1,5 @@
 package com.momentolabs.app.security.applocker
 
-import android.content.Context
-import androidx.multidex.MultiDex
 import com.facebook.soloader.SoLoader
 import com.momentolabs.app.security.applocker.di.component.DaggerAppComponent
 import com.momentolabs.app.security.applocker.service.ServiceStarter
@@ -20,11 +18,6 @@ class AppLockerApplication : DaggerApplication() {
         Beaver.build(this)
         ServiceStarter.startService(this)
         SoLoader.init(this, false)
-        WorkerStarter.startServiceCheckerWorker()
-    }
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
+        WorkerStarter.startServiceCheckerWorker(this)
     }
 }

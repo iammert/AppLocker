@@ -9,8 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.andrognito.patternlockview.PatternLockView
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
+import com.momentolabs.app.security.applocker.util.extensions.shake
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.databinding.ActivityOverlayValidationBinding
 import com.momentolabs.app.security.applocker.ui.BaseActivity
@@ -40,7 +39,7 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_overlay_validation)
 
-        updateLaunchingAppIcon(intent.getStringExtra(KEY_PACKAGE_NAME))
+        updateLaunchingAppIcon(intent.getStringExtra(KEY_PACKAGE_NAME).orEmpty())
 
         frontPictureLiveData = FrontPictureLiveData(application, viewModel.getIntruderPictureImageFile())
 
@@ -59,9 +58,7 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
             }
 
             if (it.isDrawnCorrect == false || it.fingerPrintResultData?.isNotSucces() == true) {
-                YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .playOn(binding.textViewPrompt)
+                binding.textViewPrompt.shake()
 
                 if (it.isIntrudersCatcherMode) {
                     frontPictureLiveData.takePicture()

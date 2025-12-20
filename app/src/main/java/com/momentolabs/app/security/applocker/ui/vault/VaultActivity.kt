@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaType
@@ -16,7 +17,6 @@ import com.momentolabs.app.security.applocker.ui.rateus.RateUsDialog
 import com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog.AddToVaultDialog
 import com.momentolabs.app.security.applocker.ui.vault.intent.VaultSelectorIntentHelper
 import com.momentolabs.app.security.applocker.util.helper.file.FilePathHelper
-import com.tbruyelle.rxpermissions2.RxPermissions
 
 
 class VaultActivity : BaseActivity<VaultViewModel>() {
@@ -77,28 +77,28 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
         }
     }
 
-    @SuppressLint("CheckResult")
-    private fun addToVaultClicked() {
-        RxPermissions(this)
-            .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .subscribe { granted ->
-                if (granted) {
-                    when (binding.viewPagerVault.currentItem) {
-                        0 -> startActivityForResult(
-                            VaultSelectorIntentHelper.selectMultipleImageIntent(),
-                            RC_VAULT_SELECTION_IMAGE
-                        )
-                        1 -> startActivityForResult(
-                            VaultSelectorIntentHelper.selectVideoIntent(),
-                            RC_VAULT_SELECTION_VIDEO
-                        )
-                        else -> startActivityForResult(
-                            VaultSelectorIntentHelper.selectMultipleImageIntent(),
-                            RC_VAULT_SELECTION_IMAGE
-                        )
-                    }
-                }
+    private val storagePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                openMediaPicker()
             }
+        }
+
+    private fun addToVaultClicked() {
+        storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
+
+    private fun openMediaPicker() {
+        when (binding.viewPagerVault.currentItem) {
+            1 -> startActivityForResult(
+                VaultSelectorIntentHelper.selectVideoIntent(),
+                RC_VAULT_SELECTION_VIDEO
+            )
+            else -> startActivityForResult(
+                VaultSelectorIntentHelper.selectMultipleImageIntent(),
+                RC_VAULT_SELECTION_IMAGE
+            )
+        }
     }
 
     private fun showRateUsDialog() {

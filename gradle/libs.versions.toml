@@ -1,0 +1,56 @@
+[versions]
+agp = "8.13.1"
+kotlin = "2.2.21"
+appcompat = "1.7.1"
+core-ktx = "1.17.0"
+annotation = "1.9.1"
+material = "1.13.0"
+constraintlayout = "2.2.1"
+lifecycle = "2.10.0"
+room = "2.8.4"
+work = "2.11.0"
+biometric = "1.1.0"
+dagger = "2.57.2"
+rxjava = "2.2.21"
+rxandroid = "2.1.1"
+gson = "2.13.2"
+picasso = "2.8"
+libphonenumber = "9.0.19"
+prettytime = "5.0.9.Final"
+conceal = "2.0.2"
+beaver = "1.1"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-reactivestreams = { module = "androidx.lifecycle:lifecycle-reactivestreams-ktx", version.ref = "lifecycle" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
+androidx-work-rxjava2 = { module = "androidx.work:work-rxjava2", version.ref = "work" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
+rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+libphonenumber = { module = "com.googlecode.libphonenumber:libphonenumber", version.ref = "libphonenumber" }
+prettytime = { module = "org.ocpsoft.prettytime:prettytime", version.ref = "prettytime" }
+conceal = { module = "com.facebook.conceal:conceal", version.ref = "conceal" }
+beaver = { module = "com.github.iammert:beaver", version.ref = "beaver" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
