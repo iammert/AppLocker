@@ -4,7 +4,6 @@ import com.momentolabs.app.security.applocker.di.module.ActivityBuilderModule
 import com.momentolabs.app.security.applocker.di.module.AppModule
 import com.momentolabs.app.security.applocker.AppLockerApplication
 import com.momentolabs.app.security.applocker.data.database.DatabaseModule
-import com.momentolabs.app.security.applocker.di.module.BroadcastReceiverBuilderModule
 import com.momentolabs.app.security.applocker.di.module.ServiceBuilderModule
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,7 +16,6 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         ActivityBuilderModule::class,
         ServiceBuilderModule::class,
-        BroadcastReceiverBuilderModule::class,
         AppModule::class,
         DatabaseModule::class]
 )
