@@ -9,10 +9,6 @@ import android.provider.Settings
 object PermissionChecker {
 
     fun checkUsageAccessPermission(context: Context): Boolean {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-            return true
-        }
-
         return try {
             val packageManager = context.packageManager
             val applicationInfo = packageManager.getApplicationInfo(context.packageName, 0)

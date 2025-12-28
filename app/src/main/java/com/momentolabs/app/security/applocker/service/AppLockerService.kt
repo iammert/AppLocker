@@ -82,11 +82,6 @@ class AppLockerService : DaggerService() {
         }
     }
 
-    private var installUninstallReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-        }
-    }
-
     init {
         SystemPackages.getSystemPackages().forEach { lockedAppPackageSet.add(it) }
     }
@@ -108,8 +103,6 @@ class AppLockerService : DaggerService() {
 
         registerScreenReceiver()
 
-        registerInstallUninstallReceiver()
-
         observeLockedApps()
 
         observeOverlayView()
@@ -122,25 +115,10 @@ class AppLockerService : DaggerService() {
     override fun onDestroy() {
         ServiceStarter.startService(applicationContext)
         unregisterScreenReceiver()
-        unregisterInstallUninstallReceiver()
         if (allDisposables.isDisposed.not()) {
             allDisposables.dispose()
         }
         super.onDestroy()
-    }
-
-    private fun registerInstallUninstallReceiver() {
-        var installUninstallFilter = IntentFilter()
-            .apply {
-                addAction(Intent.ACTION_PACKAGE_INSTALL)
-                addDataScheme("package")
-            }
-
-        registerReceiver(installUninstallReceiver, installUninstallFilter)
-    }
-
-    private fun unregisterInstallUninstallReceiver() {
-        unregisterReceiver(installUninstallReceiver)
     }
 
     private fun registerScreenReceiver() {
