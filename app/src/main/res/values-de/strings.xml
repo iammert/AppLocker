@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Empfohlen, App zu sperren</string>
 
+    <string name="notification_channel_protection">App-Schutz</string>
     <string name="notification_protecting_title">Schützen Sie Ihre Apps</string>
     <string name="notification_protecting_description">Sperren Sie Ihre Apps, um Ihre Privatsphäre zu schützen.</string>
 

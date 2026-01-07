@@ -26,6 +26,7 @@
 
     <string name="app_security_description">アプリをロックすることをお勧めします</string>
 
+    <string name="notification_channel_protection">アプリの保護</string>
     <string name="notification_protecting_title">アプリを保護する</string>
     <string name="notification_protecting_description">アプリをロックしてプライバシーを保護してください。</string>
 

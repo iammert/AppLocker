@@ -26,6 +26,7 @@
 
     <string name="app_security_description">建议锁定应用程序</string>
 
+    <string name="notification_channel_protection">应用保护</string>
     <string name="notification_protecting_title">保护您的应用</string>
     <string name="notification_protecting_description">锁定您的应用以保护您的隐私。</string>
 

@@ -26,6 +26,7 @@
 
     <string name="app_security_description">أوصت لقفل التطبيق</string>
 
+    <string name="notification_channel_protection">حماية التطبيقات</string>
     <string name="notification_protecting_title">حماية التطبيقات الخاصة بك</string>
     <string name="notification_protecting_description">قفل تطبيقاتك لحماية خصوصيتك.</string>
 

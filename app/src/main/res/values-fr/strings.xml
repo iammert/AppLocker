@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Recommandé de verrouiller l\'application</string>
 
+    <string name="notification_channel_protection">Protection des applis</string>
     <string name="notification_protecting_title">Protéger vos applications</string>
     <string name="notification_protecting_description">Verrouillez vos applications pour protéger votre vie privée.</string>
 

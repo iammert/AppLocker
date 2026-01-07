@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Disarankan untuk mengunci aplikasi</string>
 
+    <string name="notification_channel_protection">Perlindungan aplikasi</string>
     <string name="notification_protecting_title">Melindungi aplikasi Anda</string>
     <string name="notification_protecting_description">Kunci aplikasi Anda untuk melindungi privasi Anda.</string>
 

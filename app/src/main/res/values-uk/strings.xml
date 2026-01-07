@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Рекомендується заблокувати додаток</string>
 
+    <string name="notification_channel_protection">Захист додатків</string>
     <string name="notification_protecting_title">Захист ваших програм</string>
     <string name="notification_protecting_description">Блокуйте свої додатки, щоб захистити вашу конфіденційність.</string>
 

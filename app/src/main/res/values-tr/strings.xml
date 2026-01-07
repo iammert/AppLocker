@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Uygulamayı kilitlemek için önerilir</string>
 
+    <string name="notification_channel_protection">Uygulama koruması</string>
     <string name="notification_protecting_title">Uygulamalarınızı koruma</string>
     <string name="notification_protecting_description">Gizliliğinizi korumak için uygulamalarınızı kilitleyin.</string>
 

@@ -8,6 +8,8 @@ import android.os.IBinder
 import androidx.core.app.NotificationManagerCompat
 import com.momentolabs.app.security.applocker.data.database.lockedapps.LockedAppsDao
 import com.momentolabs.app.security.applocker.service.notification.ServiceNotificationManager
+import com.momentolabs.app.security.applocker.service.notification.ServiceNotificationManager.Companion.NOTIFICATION_ID_APPLOCKER_PERMISSION_NEED
+import com.momentolabs.app.security.applocker.service.notification.ServiceNotificationManager.Companion.NOTIFICATION_ID_APPLOCKER_SERVICE
 import com.momentolabs.app.security.applocker.service.stateprovider.AppForegroundObservable
 import com.momentolabs.app.security.applocker.util.extensions.plusAssign
 import dagger.android.DaggerService
@@ -238,8 +240,6 @@ class AppLockerService : DaggerService() {
 
     private fun initializeAppLockerNotification() {
         val notification = serviceNotificationManager.createNotification()
-        NotificationManagerCompat.from(applicationContext)
-            .notify(NOTIFICATION_ID_APPLOCKER_SERVICE, notification)
         startForeground(NOTIFICATION_ID_APPLOCKER_SERVICE, notification)
     }
 
@@ -263,10 +263,5 @@ class AppLockerService : DaggerService() {
             isOverlayShowing = false
             windowManager.removeViewImmediate(overlayView)
         }
-    }
-
-    companion object {
-        private const val NOTIFICATION_ID_APPLOCKER_SERVICE = 1
-        private const val NOTIFICATION_ID_APPLOCKER_PERMISSION_NEED = 2
     }
 }

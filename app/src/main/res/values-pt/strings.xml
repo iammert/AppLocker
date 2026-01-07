@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Recomendado para bloquear o aplicativo</string>
 
+    <string name="notification_channel_protection">Proteção de apps</string>
     <string name="notification_protecting_title">Protegendo seus aplicativos</string>
     <string name="notification_protecting_description">Bloqueie seus aplicativos para proteger sua privacidade.</string>
 

@@ -26,6 +26,7 @@
 
     <string name="app_security_description">Рекомендуется для блокировки приложения</string>
 
+    <string name="notification_channel_protection">Защита приложений</string>
     <string name="notification_protecting_title">Защита ваших приложений</string>
     <string name="notification_protecting_description">Блокируйте свои приложения, чтобы защитить вашу конфиденциальность.</string>
 

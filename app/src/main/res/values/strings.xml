@@ -10,6 +10,7 @@
 
     <string name="app_security_description">Recommended to lock app</string>
 
+    <string name="notification_channel_protection">App protection</string>
     <string name="notification_protecting_title">Protecting your apps</string>
 
     <string name="notification_protecting_description">Lock your apps to protect your privacy.</string>

@@ -26,6 +26,7 @@
 
     <string name="app_security_description">建議鎖定應用程序</string>
 
+    <string name="notification_channel_protection">應用程式保護</string>
     <string name="notification_protecting_title">保護您的應用</string>
     <string name="notification_protecting_description">鎖定您的應用以保護您的隱私。</string>
 

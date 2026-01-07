@@ -26,6 +26,7 @@
 
     <string name="app_security_description">ऐप को लॉक करने की सलाह दी</string>
 
+    <string name="notification_channel_protection">ऐप सुरक्षा</string>
     <string name="notification_protecting_title">अपने ऐप्स की सुरक्षा करना</string>
     <string name="notification_protecting_description">अपनी गोपनीयता की सुरक्षा के लिए अपने ऐप्स लॉक करें।</string>
 

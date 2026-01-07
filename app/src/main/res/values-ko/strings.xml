@@ -26,6 +26,7 @@
 
     <string name="app_security_description">앱을 잠그는 것이 좋습니다</string>
 
+    <string name="notification_channel_protection">앱 보호</string>
     <string name="notification_protecting_title">앱 보호</string>
     <string name="notification_protecting_description">개인 정보를 보호하기 위해 앱을 잠그십시오.</string>
 
