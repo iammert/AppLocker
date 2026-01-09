@@ -14,10 +14,8 @@ object WorkerStarter {
         WorkManager.getInstance(context)
             .enqueueUniquePeriodicWork(
                 UNIQUE_WORK_SERVICE_CHECKER,
-                ExistingPeriodicWorkPolicy.REPLACE,
+                ExistingPeriodicWorkPolicy.KEEP,
                 PeriodicWorkRequestBuilder<ServiceCheckerWorker>(16, TimeUnit.MINUTES).build()
             )
     }
-
-
 }
