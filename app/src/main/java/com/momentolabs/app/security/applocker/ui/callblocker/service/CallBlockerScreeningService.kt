@@ -11,7 +11,8 @@ import com.momentolabs.app.security.applocker.data.database.callblocker.calllog.
 import com.momentolabs.app.security.applocker.repository.CallBlockerRepository
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import com.momentolabs.app.security.applocker.util.extensions.plusAssign
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
@@ -22,11 +23,16 @@ class CallBlockerScreeningService : CallScreeningService() {
     @Inject
     lateinit var callBlockerRepository: CallBlockerRepository
 
-    private var blackListDisposable: Disposable? = null
+    private val disposables = CompositeDisposable()
 
     override fun onCreate() {
         super.onCreate()
         AndroidInjection.inject(this)
+    }
+
+    override fun onDestroy() {
+        disposables.dispose()
+        super.onDestroy()
     }
 
     override fun onScreenCall(details: Call.Details) {
@@ -36,13 +42,8 @@ class CallBlockerScreeningService : CallScreeningService() {
             return
         }
 
-        blackListDisposable?.let {
-            if (it.isDisposed.not()) {
-                it.dispose()
-            }
-        }
-
-        blackListDisposable = callBlockerRepository.getBlackList()
+        // Every call needs an answer, so a new call must not cancel the lookup of a previous one.
+        disposables += callBlockerRepository.getBlackList()
             .firstOrError()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +72,10 @@ class CallBlockerScreeningService : CallScreeningService() {
                         releaseCall(details = details)
                     }
                 },
-                { error -> ErrorLogger.log(error) })
+                { error ->
+                    ErrorLogger.log(error)
+                    releaseCall(details = details)
+                })
     }
 
     private fun isPhoneMatch(matchResult: PhoneNumberUtil.MatchType): Boolean {
@@ -86,10 +90,9 @@ class CallBlockerScreeningService : CallScreeningService() {
             userName = blackListItemEntity.userName,
             phoneNumber = blackListItemEntity.phoneNumber
         ).also {
-            callBlockerRepository.addToCallLog(it)
+            disposables += callBlockerRepository.addToCallLog(it)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({}, ErrorLogger::log)
         }
     }
 
