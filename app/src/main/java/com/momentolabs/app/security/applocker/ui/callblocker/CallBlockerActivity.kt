@@ -1,12 +1,13 @@
 package com.momentolabs.app.security.applocker.ui.callblocker
 
 import android.app.Activity
+import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.telecom.TelecomManager
-import androidx.annotation.RequiresApi
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.momentolabs.app.security.applocker.R
 import com.momentolabs.app.security.applocker.data.database.callblocker.addtoblacklist.AddToBlackListDialog
@@ -28,34 +29,37 @@ class CallBlockerActivity : BaseActivity<CallBlockerViewModel>() {
 
         binding.imageViewBack.setOnClickListener { onBackPressed() }
 
-        binding.buttonBlockNumber.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                setDefaulDialer()
-            } else {
+        binding.buttonBlockNumber.setOnClickListener { requestCallScreening() }
+    }
+
+    private val callScreeningRequest =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
                 showAddToBlacklistDialog()
             }
         }
-    }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun setDefaulDialer() {
-        if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
-            Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-                .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
-                .also { startActivityForResult(it, CHANGE_DIALER_REQUEST_CODE) }
-        } else {
-            showAddToBlacklistDialog()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when {
-            requestCode == CHANGE_DIALER_REQUEST_CODE && resultCode == Activity.RESULT_OK -> {
-                showAddToBlacklistDialog()
+    /**
+     * Calls only reach [CallBlockerScreeningService] when the app holds the call screening role
+     * (Android 10 and later) or is the default dialer (Android 7 to 9).
+     */
+    private fun requestCallScreening() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val roleManager = getSystemService(RoleManager::class.java)
+            if (roleManager.isRoleAvailable(RoleManager.ROLE_CALL_SCREENING) &&
+                roleManager.isRoleHeld(RoleManager.ROLE_CALL_SCREENING).not()
+            ) {
+                callScreeningRequest.launch(roleManager.createRequestRoleIntent(RoleManager.ROLE_CALL_SCREENING))
+                return
             }
+        } else if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
+            callScreeningRequest.launch(
+                Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
+                    .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
+            )
+            return
         }
+        showAddToBlacklistDialog()
     }
 
     private fun showAddToBlacklistDialog() {
@@ -63,8 +67,6 @@ class CallBlockerActivity : BaseActivity<CallBlockerViewModel>() {
     }
 
     companion object {
-
-        private const val CHANGE_DIALER_REQUEST_CODE = 1001
 
         fun newIntent(context: Context): Intent {
             return Intent(context, CallBlockerActivity::class.java)
