@@ -15,6 +15,9 @@ abstract class VaultMediaDao {
     @Query("DELETE FROM vault_media WHERE original_path = :originalPath")
     abstract fun removeFromVault(originalPath: String)
 
+    @Query("SELECT * FROM vault_media")
+    abstract fun getAllVaultMedia(): List<VaultMediaEntity>
+
     @Query("SELECT * FROM vault_media WHERE media_type = 'type_image'")
     abstract fun getVaultImages(): Flowable<List<VaultMediaEntity>>
 

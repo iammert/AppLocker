@@ -18,6 +18,8 @@
     <application
         android:name=".AppLockerApplication"
         android:allowBackup="true"
+        android:preserveLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"

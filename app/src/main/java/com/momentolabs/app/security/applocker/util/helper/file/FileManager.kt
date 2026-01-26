@@ -2,17 +2,15 @@ package com.momentolabs.app.security.applocker.util.helper.file
 
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import io.reactivex.Completable
 import java.io.File
 import javax.inject.Inject
 
 class FileManager @Inject constructor(val context: Context) {
 
-    enum class SubFolder(val subFolderPath: String) {
-        VAULT(EXTERNAL_FOLDER_VAULT),
-        INTRUDERS(EXTERNAL_FOLDER_INTRUDERS)
-
+    enum class SubFolder(val folderName: String) {
+        VAULT(FOLDER_VAULT),
+        INTRUDERS(FOLDER_INTRUDERS)
     }
 
     fun createFile(fileOperationRequest: FileOperationRequest, subFolder: SubFolder): File {
@@ -48,7 +46,6 @@ class FileManager @Inject constructor(val context: Context) {
             return arrayListOf()
         }
 
-        Log.v("TEST", "files : ${folder.absolutePath}")
         val files = folder.listFiles() ?: arrayOf()
         return files.filter { it.name.lowercase().endsWith(extension.extension.lowercase()) }
     }
@@ -66,20 +63,27 @@ class FileManager @Inject constructor(val context: Context) {
         return cacheFile.exists()
     }
 
+    /**
+     * Returns the folder for [subFolder] in app specific storage. Encrypted vault files stay in
+     * internal storage, intruder photos go to the app's external pictures folder so they can be
+     * shared. Neither needs a storage permission.
+     */
     fun getExternalDirectory(subFolder: SubFolder): File {
-        val appPath = Environment.getExternalStorageDirectory().toString() + subFolder.subFolderPath
-        val folder = File(appPath)
-        if (!folder.exists()) {
-            folder.mkdirs()
+        val parent = when (subFolder) {
+            SubFolder.VAULT -> context.filesDir
+            SubFolder.INTRUDERS -> context.getExternalFilesDir(Environment.DIRECTORY_PICTURES) ?: context.filesDir
         }
-        return folder
+        return File(parent, subFolder.folderName).apply { mkdirs() }
     }
+
+    /** Folder used before 1.6.0, in the root of the shared storage. */
+    fun getLegacyDirectory(subFolder: SubFolder): File =
+        File(Environment.getExternalStorageDirectory(), "applocker/${subFolder.folderName}")
 
     private fun getCacheDir(): File = context.cacheDir
 
     companion object {
-        private const val EXTERNAL_FOLDER_VAULT = "/applocker/vault/"
-        private const val EXTERNAL_FOLDER_INTRUDERS = "/applocker/intruders/"
+        private const val FOLDER_VAULT = "vault"
+        private const val FOLDER_INTRUDERS = "intruders"
     }
-
 }

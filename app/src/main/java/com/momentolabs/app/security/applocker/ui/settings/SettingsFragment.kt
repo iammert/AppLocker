@@ -104,16 +104,15 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
         }
     }
 
+    // Photos are stored in app specific storage, so only the camera permission is needed.
     private val intrudersPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-            viewModel.setEnableIntrudersCatchers(results.values.all { it })
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            viewModel.setEnableIntrudersCatchers(granted)
         }
 
     private fun enableIntrudersCatcher(isChecked: Boolean) {
         if (isChecked) {
-            intrudersPermissionLauncher.launch(
-                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            )
+            intrudersPermissionLauncher.launch(Manifest.permission.CAMERA)
         } else {
             viewModel.setEnableIntrudersCatchers(false)
         }
