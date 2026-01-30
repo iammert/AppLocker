@@ -19,7 +19,12 @@ class ServiceNotificationManager @Inject constructor(val context: Context) {
         createAppLockerServiceChannel()
 
         val resultIntent = Intent(context, MainActivity::class.java)
-        val resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            resultIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_APPLOCKER_SERVICE)
             .setSmallIcon(R.drawable.ic_round_lock_24px)
@@ -36,7 +41,12 @@ class ServiceNotificationManager @Inject constructor(val context: Context) {
         createAppLockerServiceChannel()
 
         val resultIntent = Intent(context, MainActivity::class.java)
-        val resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            resultIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_APPLOCKER_SERVICE)
             .setSmallIcon(R.drawable.ic_round_lock_24px)

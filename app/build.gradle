@@ -13,7 +13,7 @@ android {
         applicationId = 'com.momentolabs.app.security.applocker'
         minSdk = 23
         // Raised step by step together with the behavior changes of each release.
-        targetSdk = 29
+        targetSdk = 31
         versionCode = 38
         versionName = '1.6.0'
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'

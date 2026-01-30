@@ -15,6 +15,14 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
+    <!-- Package visibility on Android 11: the app list shows every launchable app. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:name=".AppLockerApplication"
         android:allowBackup="true"
@@ -27,6 +35,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="true"
             android:excludeFromRecents="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -75,7 +84,9 @@
 
         <service android:name=".service.AppLockerService" />
 
-        <receiver android:name=".service.receiver.BootCompleteReceiver">
+        <receiver
+            android:name=".service.receiver.BootCompleteReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -83,6 +94,7 @@
 
         <service
             android:name=".ui.callblocker.service.CallService"
+            android:exported="true"
             android:permission="android.permission.BIND_INCALL_SERVICE">
             <meta-data
                 android:name="android.telecom.IN_CALL_SERVICE_UI"
@@ -94,6 +106,7 @@
 
         <service
             android:name=".ui.callblocker.service.CallBlockerScreeningService"
+            android:exported="true"
             android:permission="android.permission.BIND_SCREENING_SERVICE">
             <intent-filter>
                 <action android:name="android.telecom.CallScreeningService" />
