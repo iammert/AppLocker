@@ -25,7 +25,9 @@
 
     <application
         android:name=".AppLockerApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
         android:preserveLegacyExternalStorage="true"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
