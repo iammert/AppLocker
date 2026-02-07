@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.momentolabs.app.security.applocker.data.database.AppLockerDatabase.Companion.MIGRATION_1_2
 import com.momentolabs.app.security.applocker.data.database.AppLockerDatabase.Companion.MIGRATION_2_3
 import com.momentolabs.app.security.applocker.data.database.AppLockerDatabase.Companion.MIGRATION_3_4
+import com.momentolabs.app.security.applocker.data.database.AppLockerDatabase.Companion.MIGRATION_4_5
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -20,7 +21,7 @@ class DatabaseModule {
     @Singleton
     fun provideDatabase(context: Context) = Room
             .databaseBuilder(context, AppLockerDatabase::class.java, DB_NAME)
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .build()
 
     @Provides

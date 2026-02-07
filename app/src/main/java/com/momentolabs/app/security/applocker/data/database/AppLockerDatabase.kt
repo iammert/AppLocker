@@ -14,14 +14,17 @@ import com.momentolabs.app.security.applocker.data.database.callblocker.calllog.
 import com.momentolabs.app.security.applocker.data.database.lockedapps.LockedAppEntity
 import com.momentolabs.app.security.applocker.data.database.lockedapps.LockedAppsDao
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDao
-import com.momentolabs.app.security.applocker.data.database.pattern.PatternEntity
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternDotMetadata
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHashEntity
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHasher
+import com.google.gson.Gson
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaDao
 import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaEntity
 
 
 @Database(
-    entities = [LockedAppEntity::class, PatternEntity::class, BookmarkEntity::class, VaultMediaEntity::class, BlackListItemEntity::class, CallLogItemEntity::class],
-    version = 4,
+    entities = [LockedAppEntity::class, PatternHashEntity::class, BookmarkEntity::class, VaultMediaEntity::class, BlackListItemEntity::class, CallLogItemEntity::class],
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(DateTypeConverters::class)
@@ -58,6 +61,26 @@ abstract class AppLockerDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("DROP TABLE IF EXISTS `vault_media`")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `vault_media` (`original_path` TEXT NOT NULL,`original_file_name` TEXT NOT NULL,`encrypted_path` TEXT NOT NULL, `encrypted_preview_path` TEXT NOT NULL,`media_type` TEXT NOT NULL, PRIMARY KEY(`original_path`))")
+            }
+        }
+
+        /**
+         * Replaces the pattern, which was stored as plain JSON, with a salted hash.
+         */
+        val MIGRATION_4_5: Migration = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `pattern_hash` (`id` INTEGER NOT NULL, `salt` TEXT NOT NULL, `hash` TEXT NOT NULL, PRIMARY KEY(`id`))")
+                database.query("SELECT `pattern_metadata` FROM `pattern` LIMIT 1").use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        val metadata = Gson().fromJson(cursor.getString(0), PatternDotMetadata::class.java)
+                        val hashed = PatternHasher.hash(metadata.pattern)
+                        database.execSQL(
+                            "INSERT INTO `pattern_hash` (`id`, `salt`, `hash`) VALUES (?, ?, ?)",
+                            arrayOf<Any>(hashed.id, hashed.salt, hashed.hash)
+                        )
+                    }
+                }
+                database.execSQL("DROP TABLE IF EXISTS `pattern`")
             }
         }
     }

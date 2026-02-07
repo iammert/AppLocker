@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.andrognito.patternlockview.PatternLockView
 import com.momentolabs.app.security.applocker.util.extensions.convertToPatternDot
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDao
-import com.momentolabs.app.security.applocker.data.database.pattern.PatternDotMetadata
-import com.momentolabs.app.security.applocker.data.database.pattern.PatternEntity
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHasher
 import com.momentolabs.app.security.applocker.ui.RxAwareViewModel
 import com.momentolabs.app.security.applocker.util.extensions.doOnBackground
 import com.momentolabs.app.security.applocker.util.helper.PatternChecker
@@ -58,9 +57,7 @@ class CreateNewPatternViewModel @Inject constructor(val patternDao: PatternDao) 
 
     private fun saveNewCreatedPattern(pattern: List<PatternLockView.Dot>){
         doOnBackground {
-            val patternMetadata = PatternDotMetadata(pattern.convertToPatternDot())
-            val patternEntity = PatternEntity(patternMetadata)
-            patternDao.createPattern(patternEntity)
+            patternDao.createPattern(PatternHasher.hash(pattern.convertToPatternDot()))
         }
     }
 }

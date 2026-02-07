@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import com.momentolabs.app.security.applocker.data.AppLockerPreferences
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDao
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDot
-import com.momentolabs.app.security.applocker.service.PatternValidatorFunction
 import com.momentolabs.app.security.applocker.ui.RxAwareAndroidViewModel
 import com.momentolabs.app.security.applocker.ui.background.GradientBackgroundDataProvider
 import com.momentolabs.app.security.applocker.ui.background.GradientItemViewState
@@ -19,7 +18,10 @@ import com.momentolabs.app.security.applocker.util.helper.file.DirectoryType
 import com.momentolabs.app.security.applocker.util.helper.file.FileExtension
 import com.momentolabs.app.security.applocker.util.helper.file.FileManager
 import com.momentolabs.app.security.applocker.util.helper.file.FileOperationRequest
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHashEntity
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHasher
 import io.reactivex.BackpressureStrategy
+import io.reactivex.functions.BiFunction
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -47,12 +49,16 @@ class OverlayValidationViewModel @Inject constructor(
     private val patternDrawnSubject = PublishSubject.create<List<PatternDot>>()
 
     init {
-        val existingPatternObservable = patternDao.getPattern().map { it.patternMetadata.pattern }
+        val existingPatternObservable = patternDao.getPattern()
         disposables += Flowable
             .combineLatest(
                 existingPatternObservable,
-                patternDrawnSubject.toFlowable(BackpressureStrategy.BUFFER),
-                PatternValidatorFunction()
+                // Hashing takes a moment, so it must not run on the main thread.
+                patternDrawnSubject.toFlowable(BackpressureStrategy.BUFFER)
+                    .observeOn(Schedulers.computation()),
+                BiFunction<PatternHashEntity, List<PatternDot>, Boolean> { stored, drawn ->
+                    PatternHasher.matches(drawn, stored)
+                }
             )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

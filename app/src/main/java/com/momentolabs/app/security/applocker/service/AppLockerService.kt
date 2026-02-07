@@ -27,7 +27,10 @@ import com.momentolabs.app.security.applocker.service.stateprovider.PermissionCh
 import com.momentolabs.app.security.applocker.ui.overlay.activity.OverlayValidationActivity
 import com.momentolabs.app.security.applocker.ui.overlay.view.OverlayViewLayoutParams
 import com.momentolabs.app.security.applocker.ui.overlay.view.PatternOverlayView
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHashEntity
+import com.momentolabs.app.security.applocker.data.database.pattern.PatternHasher
 import io.reactivex.BackpressureStrategy
+import io.reactivex.functions.BiFunction
 import io.reactivex.Flowable
 import io.reactivex.subjects.PublishSubject
 import android.content.IntentFilter
@@ -150,11 +153,16 @@ class AppLockerService : DaggerService() {
     private fun observeOverlayView() {
         allDisposables += Flowable
             .combineLatest(
-                patternDao.getPattern().map { it.patternMetadata.pattern },
-                validatedPatternObservable.toFlowable(BackpressureStrategy.BUFFER),
-                PatternValidatorFunction()
+                patternDao.getPattern(),
+                // Hashing takes a moment, so it must not run on the main thread.
+                validatedPatternObservable.toFlowable(BackpressureStrategy.BUFFER)
+                    .observeOn(Schedulers.computation()),
+                BiFunction<PatternHashEntity, List<PatternDot>, Boolean> { stored, drawn ->
+                    PatternHasher.matches(drawn, stored)
+                }
             )
-            .subscribe(this@AppLockerService::onPatternValidated)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this@AppLockerService::onPatternValidated, ErrorLogger::log)
     }
 
     private fun initializeOverlayView() {
