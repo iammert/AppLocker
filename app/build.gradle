@@ -48,6 +48,10 @@ android {
         dataBinding = true
         buildConfig = true
     }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 kotlin {
@@ -86,4 +90,9 @@ dependencies {
     implementation libs.prettytime
     implementation libs.conceal
     implementation libs.beaver
+
+    testImplementation libs.junit
+    testImplementation libs.androidx.test.core.ktx
+    testImplementation libs.androidx.test.ext.junit.ktx
+    testImplementation libs.robolectric
 }

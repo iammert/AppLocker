@@ -19,6 +19,10 @@ libphonenumber = "9.0.19"
 prettytime = "5.0.9.Final"
 conceal = "2.0.2"
 beaver = "1.1"
+junit = "4.13.2"
+androidx-test = "1.7.0"
+androidx-test-ext = "1.3.0"
+robolectric = "4.16"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -47,6 +51,10 @@ libphonenumber = { module = "com.googlecode.libphonenumber:libphonenumber", vers
 prettytime = { module = "org.ocpsoft.prettytime:prettytime", version.ref = "prettytime" }
 conceal = { module = "com.facebook.conceal:conceal", version.ref = "conceal" }
 beaver = { module = "com.github.iammert:beaver", version.ref = "beaver" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
+androidx-test-ext-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-ext" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
