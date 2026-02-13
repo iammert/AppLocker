@@ -31,12 +31,12 @@ class RemoveFromVaultDialog : BaseBottomSheetDialog<RemoveFromVaultViewModel>() 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val vaultMediaEntity = arguments?.getParcelable<VaultMediaEntity>(KEY_VAULT_MEDIA_ENTITY)
 
-        viewModel.getRemoveFromVaultViewStateLiveData().observe(this, Observer { viewState ->
+        viewModel.getRemoveFromVaultViewStateLiveData().observe(viewLifecycleOwner, Observer { viewState ->
             binding.viewState = viewState
             binding.executePendingBindings()
 

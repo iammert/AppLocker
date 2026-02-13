@@ -24,10 +24,10 @@ class CallLogFragment : BaseFragment<CallLogViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getViewStateLiveData().observe(this, Observer {
+        viewModel.getViewStateLiveData().observe(viewLifecycleOwner, Observer {
             binding.viewState = it
             binding.executePendingBindings()
             callLogsAdapter.setCallLogsItems(it.callLogsViewState)

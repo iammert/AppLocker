@@ -81,14 +81,14 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getSettingsViewStateLiveData().observe(this, Observer {
+        viewModel.getSettingsViewStateLiveData().observe(viewLifecycleOwner, Observer {
             binding.viewState = it
         })
 
-        viewModel.getFingerPrintStatusViewStateLiveData().observe(this, Observer {
+        viewModel.getFingerPrintStatusViewStateLiveData().observe(viewLifecycleOwner, Observer {
             binding.fingerPrintStatus = it
         })
     }

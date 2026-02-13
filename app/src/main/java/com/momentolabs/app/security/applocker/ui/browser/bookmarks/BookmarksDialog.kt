@@ -37,9 +37,9 @@ class BookmarksDialog : BaseBottomSheetDialog<BookmarksViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.getBookmarksLiveData().observe(this, Observer { bookmarksAdapter.updateBookmarks(it) })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getBookmarksLiveData().observe(viewLifecycleOwner, Observer { bookmarksAdapter.updateBookmarks(it) })
     }
 
     override fun onAttach(context: Context) {

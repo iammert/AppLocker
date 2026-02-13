@@ -32,10 +32,10 @@ class VaultListFragment : BaseFragment<VaultListViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getVaultListViewStateLiveData().observe(this, Observer {
+        viewModel.getVaultListViewStateLiveData().observe(viewLifecycleOwner, Observer {
             binding.viewState = it
             binding.executePendingBindings()
             vaultListAdapter.updateVaultList(it.vaultList)

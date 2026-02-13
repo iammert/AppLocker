@@ -63,9 +63,9 @@ class SecurityFragment : BaseFragment<SecurityViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.getAppDataListLiveData().observe(this, Observer {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getAppDataListLiveData().observe(viewLifecycleOwner, Observer {
             adapter.setAppDataList(it)
         })
 

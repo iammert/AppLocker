@@ -25,9 +25,9 @@ class BackgroundsFragment : BaseFragment<BackgroundsFragmentViewModel>() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.getBackgroundViewStateLiveData().observe(this, Observer {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getBackgroundViewStateLiveData().observe(viewLifecycleOwner, Observer {
             backgroundsAdapter.setViewStateList(it)
         })
     }
