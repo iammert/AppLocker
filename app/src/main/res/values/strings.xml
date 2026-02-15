@@ -174,7 +174,7 @@
 
     <!-- Intruders Photo Activity -->
     <string name="title_intruders_photos">Intruders Photos</string>
-    <string name="empty_page_intruders_title">No Intruders Catched</string>
+    <string name="empty_page_intruders_title">No intruders caught</string>
     <string name="empty_page_intruders_description">Your phone is secure!</string>
 
 </resources>

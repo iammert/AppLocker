@@ -25,7 +25,7 @@ class BackgroundsFragmentViewModel @Inject constructor(val appLockerPreferences:
     fun onSelectedItemChanged(selectedItemViewState: GradientItemViewState) {
         val modifiedList = backgroundViewStateLiveData.value
         modifiedList?.forEach { it.isChecked = it.id == selectedItemViewState.id }
-        backgroundViewStateLiveData.value = modifiedList
+        modifiedList?.let { backgroundViewStateLiveData.value = it }
 
         appLockerPreferences.setSelectedBackgroundId(selectedItemViewState.id)
     }

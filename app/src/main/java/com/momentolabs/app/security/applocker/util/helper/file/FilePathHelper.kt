@@ -629,7 +629,7 @@ object FilePathHelper {
         return File.createTempFile(fileName, ".jpg", storageDir)
     }
 
-    fun getFileName(@NonNull context: Context, uri: Uri): String? {
+    fun getFileName(context: Context, uri: Uri): String? {
         val mimeType = context.contentResolver.getType(uri)
         var filename: String? = null
 

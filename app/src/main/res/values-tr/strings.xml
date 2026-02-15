@@ -165,5 +165,6 @@
     <string name="settings_intruders_folder_title">Davetsiz misafirin fotoğrafları</string>
     <string name="title_intruders_photos">Davetsiz misafir fotoğrafları</string>
     <string name="feedback">Geri bildirim</string>
-
+    <string name="empty_page_intruders_title">Davetsiz misafir yakalanmadı</string>
+    <string name="empty_page_intruders_description">Telefonun güvende!</string>
 </resources>
