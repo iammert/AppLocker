@@ -1,6 +1,11 @@
 package com.momentolabs.app.security.applocker.ui.main
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
@@ -79,6 +84,7 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
             RC_CREATE_PATTERN -> {
                 viewModel.onAppLaunchValidated()
                 showPrivacyPolicyIfNeeded()
+                requestNotificationPermissionIfNeeded()
                 if (resultCode != Activity.RESULT_OK) {
                     finish()
                 }
@@ -87,10 +93,23 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
                 if (resultCode == Activity.RESULT_OK) {
                     viewModel.onAppLaunchValidated()
                     showPrivacyPolicyIfNeeded()
+                    requestNotificationPermissionIfNeeded()
                 } else {
                     finish()
                 }
             }
+        }
+    }
+
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    /** The protection notification and the permission reminder need this on Android 13. */
+    private fun requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 

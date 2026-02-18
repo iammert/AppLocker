@@ -252,9 +252,18 @@ class AppLockerService : DaggerService() {
     }
 
     private fun showPermissionNeedNotification() {
-        val notification = serviceNotificationManager.createPermissionNeedNotification()
-        NotificationManagerCompat.from(applicationContext)
-            .notify(NOTIFICATION_ID_APPLOCKER_PERMISSION_NEED, notification)
+        val notificationManager = NotificationManagerCompat.from(applicationContext)
+        // Since Android 13 notifications need a runtime permission the user may not have granted.
+        if (notificationManager.areNotificationsEnabled()) {
+            try {
+                notificationManager.notify(
+                    NOTIFICATION_ID_APPLOCKER_PERMISSION_NEED,
+                    serviceNotificationManager.createPermissionNeedNotification()
+                )
+            } catch (exception: SecurityException) {
+                ErrorLogger.log(exception)
+            }
+        }
     }
 
     private fun showOverlay(lockedAppPackageName: String) {

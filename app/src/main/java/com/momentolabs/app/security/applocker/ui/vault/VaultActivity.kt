@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -78,14 +79,23 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
     }
 
     private val storagePermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) {
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            if (results.values.all { it }) {
                 openMediaPicker()
             }
         }
 
     private fun addToVaultClicked() {
-        storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        storagePermissionLauncher.launch(mediaPermissions())
+    }
+
+    private fun mediaPermissions(): Array<String> = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> arrayOf(
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO
+        )
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        else -> arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private fun openMediaPicker() {
