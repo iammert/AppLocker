@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -78,9 +79,9 @@ dependencies {
 
     implementation libs.dagger.android
     implementation libs.dagger.android.support
-    kapt libs.dagger.compiler
-    kapt libs.dagger.android.processor
-    kapt libs.androidx.room.compiler
+    ksp libs.dagger.compiler
+    ksp libs.dagger.android.processor
+    ksp libs.androidx.room.compiler
 
     implementation libs.rxjava
     implementation libs.rxandroid
