@@ -1,7 +1,7 @@
 [versions]
-agp = "8.13.1"
-kotlin = "2.2.21"
-ksp = "2.3.2"
+agp = "9.0.1"
+kotlin = "2.3.10"
+ksp = "2.3.6"
 appcompat = "1.7.1"
 core-ktx = "1.17.0"
 annotation = "1.9.1"
@@ -61,6 +61,6 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+android-legacy-kapt = { id = "com.android.legacy-kapt", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

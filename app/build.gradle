@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    // Data binding still needs kapt, which AGP 9 provides for its built-in Kotlin support.
+    alias(libs.plugins.android.legacy.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
 }
