@@ -10,6 +10,7 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <!-- Needed to read and remove the media that is moved to the vault. -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -98,7 +99,14 @@
             android:name=".ui.intruders.IntrudersPhotosActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".service.AppLockerService" />
+        <service
+            android:name=".service.AppLockerService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Watches which app is in the foreground to show the lock screen over locked apps." />
+        </service>
 
         <receiver
             android:name=".service.receiver.BootCompleteReceiver"

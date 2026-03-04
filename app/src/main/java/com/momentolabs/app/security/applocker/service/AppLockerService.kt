@@ -4,7 +4,11 @@ import com.momentolabs.app.security.applocker.util.helper.ErrorLogger
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
+import android.os.Build
 import android.os.IBinder
+import androidx.core.app.ServiceCompat
+import androidx.core.content.ContextCompat
 import androidx.core.app.NotificationManagerCompat
 import com.momentolabs.app.security.applocker.data.database.lockedapps.LockedAppsDao
 import com.momentolabs.app.security.applocker.service.notification.ServiceNotificationManager
@@ -130,7 +134,7 @@ class AppLockerService : DaggerService() {
         val screenFilter = IntentFilter()
         screenFilter.addAction(Intent.ACTION_SCREEN_ON)
         screenFilter.addAction(Intent.ACTION_SCREEN_OFF)
-        registerReceiver(screenOnOffReceiver, screenFilter)
+        ContextCompat.registerReceiver(this, screenOnOffReceiver, screenFilter, ContextCompat.RECEIVER_NOT_EXPORTED)
     }
 
     private fun unregisterScreenReceiver() {
@@ -248,7 +252,16 @@ class AppLockerService : DaggerService() {
 
     private fun initializeAppLockerNotification() {
         val notification = serviceNotificationManager.createNotification()
-        startForeground(NOTIFICATION_ID_APPLOCKER_SERVICE, notification)
+        ServiceCompat.startForeground(
+            this,
+            NOTIFICATION_ID_APPLOCKER_SERVICE,
+            notification,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+            } else {
+                0
+            }
+        )
     }
 
     private fun showPermissionNeedNotification() {
