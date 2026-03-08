@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.intruders
 
+import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,7 @@ class IntrudersPhotosActivity : BaseActivity<IntrudersPhotosViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        secureWindow()
 
         binding.recyclerViewIntrudersPhotosList.adapter = intrudersListAdapter
 

@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.newpattern
 
+import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -19,6 +20,7 @@ class CreateNewPatternActivity : BaseActivity<CreateNewPatternViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        secureWindow()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_new_pattern)
 
         binding.patternLockView.addPatternLockListener(object : SimplePatternListener() {

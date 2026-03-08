@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.overlay.activity
 
+import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -37,6 +38,7 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        secureWindow()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_overlay_validation)
 
         updateLaunchingAppIcon(intent.getStringExtra(KEY_PACKAGE_NAME).orEmpty())

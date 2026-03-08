@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.vault
 
+import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -28,6 +29,7 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        secureWindow()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vault)
 
 
