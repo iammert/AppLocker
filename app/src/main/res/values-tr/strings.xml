@@ -167,4 +167,8 @@
     <string name="feedback">Geri bildirim</string>
     <string name="empty_page_intruders_title">Davetsiz misafir yakalanmadı</string>
     <string name="empty_page_intruders_description">Telefonun güvende!</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="one">Çok fazla deneme. %d saniye sonra tekrar dene.</item>
+        <item quantity="other">Çok fazla deneme. %d saniye sonra tekrar dene.</item>
+    </plurals>
 </resources>

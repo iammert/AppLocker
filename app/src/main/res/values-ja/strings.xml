@@ -173,4 +173,7 @@
 -->
     <string name="empty_page_intruders_title">侵入者は検出されていません</string>
     <string name="empty_page_intruders_description">スマートフォンは安全です！</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="other">試行回数が多すぎます。%d 秒後にもう一度お試しください。</item>
+    </plurals>
 </resources>

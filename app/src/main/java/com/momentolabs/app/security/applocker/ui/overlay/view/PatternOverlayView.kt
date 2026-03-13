@@ -60,6 +60,15 @@ class PatternOverlayView @JvmOverloads constructor(
         binding.textViewPrompt.shake()
     }
 
+    fun notifyLockedOut(lockoutSeconds: Int) {
+        binding.patternLockView.clearPattern()
+        binding.viewState = OverlayViewState(
+            overlayValidateType = OverlayValidateType.TYPE_PATTERN,
+            lockoutSeconds = lockoutSeconds
+        )
+        binding.textViewPrompt.shake()
+    }
+
     fun notifyDrawnCorrect() {
         binding.patternLockView.clearPattern()
         binding.viewState =

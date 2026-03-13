@@ -173,4 +173,7 @@
 -->
     <string name="empty_page_intruders_title">Tidak ada penyusup tertangkap</string>
     <string name="empty_page_intruders_description">Ponsel Anda aman!</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="other">Terlalu banyak percobaan. Coba lagi dalam %d detik.</item>
+    </plurals>
 </resources>

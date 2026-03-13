@@ -173,4 +173,7 @@
 -->
     <string name="empty_page_intruders_title">감지된 침입자가 없습니다</string>
     <string name="empty_page_intruders_description">휴대전화가 안전합니다!</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="other">시도 횟수가 너무 많습니다. %d초 후에 다시 시도하세요.</item>
+    </plurals>
 </resources>

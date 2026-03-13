@@ -173,4 +173,7 @@
 -->
     <string name="empty_page_intruders_title">未发现入侵者</string>
     <string name="empty_page_intruders_description">您的手机很安全！</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="other">尝试次数过多。请在 %d 秒后重试。</item>
+    </plurals>
 </resources>

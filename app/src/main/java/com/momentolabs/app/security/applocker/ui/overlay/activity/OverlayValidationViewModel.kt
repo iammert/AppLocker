@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.momentolabs.app.security.applocker.data.AppLockerPreferences
+import com.momentolabs.app.security.applocker.data.UnlockAttemptLimiter
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDao
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDot
 import com.momentolabs.app.security.applocker.ui.RxAwareAndroidViewModel
@@ -33,7 +34,8 @@ class OverlayValidationViewModel @Inject constructor(
     val app: Application,
     val patternDao: PatternDao,
     val appLockerPreferences: AppLockerPreferences,
-    val fileManager: FileManager
+    val fileManager: FileManager,
+    val unlockAttemptLimiter: UnlockAttemptLimiter
 ) : RxAwareAndroidViewModel(app) {
 
     private val patternValidationViewStateLiveData = MediatorLiveData<OverlayViewState>()
@@ -63,13 +65,20 @@ class OverlayValidationViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { isValidated ->
+                val lockoutSeconds = if (isValidated) {
+                    unlockAttemptLimiter.onSuccessfulAttempt()
+                    0
+                } else {
+                    unlockAttemptLimiter.onFailedAttempt()
+                }
                 patternValidationViewStateLiveData.value =
                     OverlayViewState(
                         overlayValidateType = OverlayValidateType.TYPE_PATTERN,
                         isDrawnCorrect = isValidated,
                         isHiddenDrawingMode = appLockerPreferences.getHiddenDrawingMode(),
                         isIntrudersCatcherMode = appLockerPreferences.getIntrudersCatcherEnabled(),
-                        isFingerPrintMode = appLockerPreferences.getFingerPrintEnabled()
+                        isFingerPrintMode = appLockerPreferences.getFingerPrintEnabled(),
+                        lockoutSeconds = lockoutSeconds
                     )
             }
 
@@ -99,6 +108,16 @@ class OverlayValidationViewModel @Inject constructor(
     }
 
     fun onPatternDrawn(pattern: List<PatternDot>) {
+        val lockoutSeconds = unlockAttemptLimiter.remainingLockoutSeconds()
+        if (lockoutSeconds > 0) {
+            patternValidationViewStateLiveData.value = OverlayViewState(
+                overlayValidateType = OverlayValidateType.TYPE_PATTERN,
+                isHiddenDrawingMode = appLockerPreferences.getHiddenDrawingMode(),
+                isFingerPrintMode = appLockerPreferences.getFingerPrintEnabled(),
+                lockoutSeconds = lockoutSeconds
+            )
+            return
+        }
         patternDrawnSubject.onNext(pattern)
     }
 

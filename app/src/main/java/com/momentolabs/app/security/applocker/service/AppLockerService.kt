@@ -24,6 +24,7 @@ import javax.inject.Inject
 import android.view.WindowManager
 import com.andrognito.patternlockview.PatternLockView
 import com.momentolabs.app.security.applocker.data.AppLockerPreferences
+import com.momentolabs.app.security.applocker.data.UnlockAttemptLimiter
 import com.momentolabs.app.security.applocker.util.extensions.convertToPatternDot
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDao
 import com.momentolabs.app.security.applocker.data.database.pattern.PatternDot
@@ -63,6 +64,9 @@ class AppLockerService : DaggerService() {
 
     @Inject
     lateinit var appLockerPreferences: AppLockerPreferences
+
+    @Inject
+    lateinit var unlockAttemptLimiter: UnlockAttemptLimiter
 
     private val validatedPatternObservable = PublishSubject.create<List<PatternDot>>()
 
@@ -238,15 +242,26 @@ class AppLockerService : DaggerService() {
     }
 
     private fun onDrawPattern(pattern: List<PatternLockView.Dot>) {
+        val lockoutSeconds = unlockAttemptLimiter.remainingLockoutSeconds()
+        if (lockoutSeconds > 0) {
+            overlayView.notifyLockedOut(lockoutSeconds)
+            return
+        }
         validatedPatternObservable.onNext(pattern.convertToPatternDot())
     }
 
     private fun onPatternValidated(isDrawedPatternCorrect: Boolean) {
         if (isDrawedPatternCorrect) {
+            unlockAttemptLimiter.onSuccessfulAttempt()
             overlayView.notifyDrawnCorrect()
             hideOverlay()
         } else {
-            overlayView.notifyDrawnWrong()
+            val lockoutSeconds = unlockAttemptLimiter.onFailedAttempt()
+            if (lockoutSeconds > 0) {
+                overlayView.notifyLockedOut(lockoutSeconds)
+            } else {
+                overlayView.notifyDrawnWrong()
+            }
         }
     }
 

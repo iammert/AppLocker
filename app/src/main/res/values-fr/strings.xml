@@ -173,4 +173,8 @@
 -->
     <string name="empty_page_intruders_title">Aucun intrus détecté</string>
     <string name="empty_page_intruders_description">Votre téléphone est en sécurité !</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="one">Trop de tentatives. Réessayez dans %d seconde.</item>
+        <item quantity="other">Trop de tentatives. Réessayez dans %d secondes.</item>
+    </plurals>
 </resources>

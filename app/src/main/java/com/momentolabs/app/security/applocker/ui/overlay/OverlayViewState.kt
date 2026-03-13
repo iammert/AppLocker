@@ -13,10 +13,14 @@ data class OverlayViewState(
     val fingerPrintResultData: FingerPrintResultData? = null,
     val isHiddenDrawingMode: Boolean = false,
     val isFingerPrintMode: Boolean = false,
-    val isIntrudersCatcherMode: Boolean = false
+    val isIntrudersCatcherMode: Boolean = false,
+    val lockoutSeconds: Int = 0
 ) {
 
     fun getPromptMessage(context: Context): String {
+        if (lockoutSeconds > 0) {
+            return context.resources.getQuantityString(R.plurals.overlay_prompt_locked_out, lockoutSeconds, lockoutSeconds)
+        }
         return when (overlayValidateType) {
             TYPE_PATTERN -> {
                 when (isDrawnCorrect) {

@@ -173,4 +173,12 @@
 -->
     <string name="empty_page_intruders_title">لم يتم رصد أي متطفل</string>
     <string name="empty_page_intruders_description">هاتفك آمن!</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="zero">محاولات كثيرة جدًا. حاول مرة أخرى بعد %d ثانية.</item>
+        <item quantity="one">محاولات كثيرة جدًا. حاول مرة أخرى بعد ثانية واحدة.</item>
+        <item quantity="two">محاولات كثيرة جدًا. حاول مرة أخرى بعد ثانيتين.</item>
+        <item quantity="few">محاولات كثيرة جدًا. حاول مرة أخرى بعد %d ثوانٍ.</item>
+        <item quantity="many">محاولات كثيرة جدًا. حاول مرة أخرى بعد %d ثانية.</item>
+        <item quantity="other">محاولات كثيرة جدًا. حاول مرة أخرى بعد %d ثانية.</item>
+    </plurals>
 </resources>

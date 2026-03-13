@@ -173,4 +173,8 @@
 -->
     <string name="empty_page_intruders_title">कोई घुसपैठिया नहीं पकड़ा गया</string>
     <string name="empty_page_intruders_description">आपका फ़ोन सुरक्षित है!</string>
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="one">बहुत ज़्यादा प्रयास। %d सेकंड में फिर से कोशिश करें।</item>
+        <item quantity="other">बहुत ज़्यादा प्रयास। %d सेकंड में फिर से कोशिश करें।</item>
+    </plurals>
 </resources>

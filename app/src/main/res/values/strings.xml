@@ -176,5 +176,8 @@
     <string name="title_intruders_photos">Intruders Photos</string>
     <string name="empty_page_intruders_title">No intruders caught</string>
     <string name="empty_page_intruders_description">Your phone is secure!</string>
-
+    <plurals name="overlay_prompt_locked_out">
+        <item quantity="one">Too many attempts. Try again in %d second.</item>
+        <item quantity="other">Too many attempts. Try again in %d seconds.</item>
+    </plurals>
 </resources>
