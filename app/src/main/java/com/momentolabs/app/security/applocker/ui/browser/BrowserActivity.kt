@@ -1,8 +1,10 @@
 package com.momentolabs.app.security.applocker.ui.browser
 
+import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -57,6 +59,7 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        secureWindow()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_browser)
 
         initializeWebView()
@@ -131,6 +134,19 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
         viewModel.load(bookmarkEntity.url)
     }
 
+    override fun onDestroy() {
+        // Leave nothing of the private session behind.
+        with(binding.webView) {
+            clearHistory()
+            clearCache(true)
+            clearFormData()
+            destroy()
+        }
+        WebStorage.getInstance().deleteAllData()
+        CookieManager.getInstance().removeAllCookies(null)
+        super.onDestroy()
+    }
+
     private fun initializeWebView() {
         CookieManager.getInstance().setAcceptCookie(false)
 
@@ -139,12 +155,17 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
             webViewClient = browserClient
             settings.javaScriptEnabled = true
             settings.cacheMode = WebSettings.LOAD_NO_CACHE
-            clearHistory();
+            // Pages must not reach the app's files or content providers.
+            settings.allowFileAccess = false
+            settings.allowContentAccess = false
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+            settings.setGeolocationEnabled(false)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                settings.safeBrowsingEnabled = true
+            }
+            clearHistory()
             clearCache(true)
-
-            clearFormData();
-            settings.savePassword = false
-            settings.saveFormData = false
+            clearFormData()
         }
     }
 
