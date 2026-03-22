@@ -44,18 +44,10 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
 
         viewModel.getPatternCreationNeedLiveData().observe(this, Observer { isPatternCreateNeed ->
             when {
-                isPatternCreateNeed -> {
-                    startActivityForResult(
-                        CreateNewPatternActivity.newIntent(this),
-                        RC_CREATE_PATTERN
-                    )
-                }
-                viewModel.isAppLaunchValidated().not() -> {
-                    startActivityForResult(
-                        OverlayValidationActivity.newIntent(this, this.packageName),
-                        RC_VALIDATE_PATTERN
-                    )
-                }
+                isPatternCreateNeed -> createPatternLauncher.launch(CreateNewPatternActivity.newIntent(this))
+                viewModel.isAppLaunchValidated().not() -> validatePatternLauncher.launch(
+                    OverlayValidationActivity.newIntent(this, this.packageName)
+                )
             }
         })
     }
@@ -78,27 +70,28 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
         return true
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            RC_CREATE_PATTERN -> {
-                viewModel.onAppLaunchValidated()
-                showPrivacyPolicyIfNeeded()
-                requestNotificationPermissionIfNeeded()
-                if (resultCode != Activity.RESULT_OK) {
-                    finish()
-                }
-            }
-            RC_VALIDATE_PATTERN -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    viewModel.onAppLaunchValidated()
-                    showPrivacyPolicyIfNeeded()
-                    requestNotificationPermissionIfNeeded()
-                } else {
-                    finish()
-                }
+    private val createPatternLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                onAppUnlocked()
+            } else {
+                finish()
             }
         }
+
+    private val validatePatternLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                onAppUnlocked()
+            } else {
+                finish()
+            }
+        }
+
+    private fun onAppUnlocked() {
+        viewModel.onAppLaunchValidated()
+        showPrivacyPolicyIfNeeded()
+        requestNotificationPermissionIfNeeded()
     }
 
     private val notificationPermissionLauncher =
@@ -117,10 +110,5 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
         if (viewModel.isPrivacyPolicyAccepted().not()) {
             PrivacyPolicyDialog.newInstance().show(supportFragmentManager, "")
         }
-    }
-
-    companion object {
-        private const val RC_CREATE_PATTERN = 2002
-        private const val RC_VALIDATE_PATTERN = 2003
     }
 }

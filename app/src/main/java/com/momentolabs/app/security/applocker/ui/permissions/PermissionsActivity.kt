@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.momentolabs.app.security.applocker.databinding.ActivityPermissionsBinding
 import com.momentolabs.app.security.applocker.ui.BaseActivity
@@ -34,7 +35,7 @@ class PermissionsActivity : BaseActivity<PermissionsViewModel>() {
 
         binding.switchOverlay.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked && PermissionChecker.checkOverlayPermission(this).not()) {
-                startActivityForResult(IntentHelper.overlayIntent(packageName), RC_OVERLAY_PERMISSION)
+                overlayPermissionLauncher.launch(IntentHelper.overlayIntent(packageName))
             }
         }
 
@@ -49,12 +50,13 @@ class PermissionsActivity : BaseActivity<PermissionsViewModel>() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            RC_OVERLAY_PERMISSION -> binding.switchOverlay.isChecked = Settings.canDrawOverlays(this)
+    private val overlayPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            binding.switchOverlay.isChecked = Settings.canDrawOverlays(this)
+            onPermissionResult()
         }
 
+    private fun onPermissionResult() {
         if (isAllPermissionsPermitted()) {
             serviceNotificationManager.hidePermissionNotification()
             setResult(Activity.RESULT_OK)
@@ -76,7 +78,6 @@ class PermissionsActivity : BaseActivity<PermissionsViewModel>() {
                 PermissionChecker.checkOverlayPermission(this)
 
     companion object {
-        private const val RC_OVERLAY_PERMISSION = 123
 
         fun newIntent(context: Context): Intent {
             return Intent(context, PermissionsActivity::class.java)

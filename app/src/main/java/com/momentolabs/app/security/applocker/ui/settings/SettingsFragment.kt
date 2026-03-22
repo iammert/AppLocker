@@ -52,7 +52,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
 
         binding.layoutChangePattern.setOnClickListener {
             activity?.let {
-                startActivityForResult(CreateNewPatternActivity.newIntent(it), RC_CHANGE_PATTERN)
+                changePatternLauncher.launch(CreateNewPatternActivity.newIntent(it))
             }
         }
 
@@ -93,16 +93,12 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
         })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            RC_CHANGE_PATTERN -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    activity?.let { it.toast(R.string.message_pattern_changed) }
-                }
+    private val changePatternLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                activity?.toast(R.string.message_pattern_changed)
             }
         }
-    }
 
     // Photos are stored in app specific storage, so only the camera permission is needed.
     private val intrudersPermissionLauncher =
@@ -119,8 +115,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel>() {
     }
 
     companion object {
-
-        private const val RC_CHANGE_PATTERN = 101
         fun newInstance() = SettingsFragment()
     }
 }
