@@ -39,45 +39,35 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
         binding.buttonAddToVault.setOnClickListener { addToVaultClicked() }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                RC_VAULT_SELECTION_IMAGE -> {
+    private val imagePickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val data = result.data
+            if (result.resultCode != Activity.RESULT_OK || data == null) {
+                return@registerForActivityResult
+            }
+            val uris = data.clipData
+                ?.let { clipData -> (0 until clipData.itemCount).map { clipData.getItemAt(it).uri } }
+                ?: listOfNotNull(data.data)
+            showAddToVaultDialog(uris, VaultMediaType.TYPE_IMAGE)
+        }
 
-                    val pathList = arrayListOf<String?>()
-
-                    if (data?.data != null) {
-                        pathList.add(FilePathHelper.getSafePath(this, data.data ?: Uri.EMPTY))
-                    } else if (data?.clipData != null) {
-
-                        val selectedItemCount = data.clipData?.itemCount ?: 0
-                        for (i in 0 until selectedItemCount) {
-                            val imageUri = data.clipData?.getItemAt(i)?.uri
-                            pathList.add(FilePathHelper.getSafePath(this, imageUri ?: Uri.EMPTY))
-                        }
-                    }
-
-                    if (pathList.isEmpty().not()) {
-                        AddToVaultDialog
-                            .newInstance(pathList, VaultMediaType.TYPE_IMAGE)
-                            .apply { onDismissListener = { showRateUsDialog() } }
-                            .also { it.show(supportFragmentManager, "") }
-                    }
-                }
-                RC_VAULT_SELECTION_VIDEO -> {
-                    val path = FilePathHelper.getSafePath(this, data?.data ?: Uri.EMPTY)
-                    val paths = arrayListOf<String?>().also { it.add(path) }
-
-                    path?.let {
-                        AddToVaultDialog
-                            .newInstance(paths, VaultMediaType.TYPE_VIDEO)
-                            .apply { onDismissListener = { showRateUsDialog() } }
-                            .also { it.show(supportFragmentManager, "") }
-                    }
-                }
+    private val videoPickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val uri = result.data?.data
+            if (result.resultCode == Activity.RESULT_OK && uri != null) {
+                showAddToVaultDialog(listOf(uri), VaultMediaType.TYPE_VIDEO)
             }
         }
+
+    private fun showAddToVaultDialog(uris: List<Uri>, mediaType: VaultMediaType) {
+        val paths = ArrayList(uris.mapNotNull { FilePathHelper.getSafePath(this, it) })
+        if (paths.isEmpty()) {
+            return
+        }
+        AddToVaultDialog
+            .newInstance(ArrayList<String?>(paths), mediaType)
+            .apply { onDismissListener = { showRateUsDialog() } }
+            .also { it.show(supportFragmentManager, "") }
     }
 
     private val storagePermissionLauncher =
@@ -102,14 +92,8 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
 
     private fun openMediaPicker() {
         when (binding.viewPagerVault.currentItem) {
-            1 -> startActivityForResult(
-                VaultSelectorIntentHelper.selectVideoIntent(),
-                RC_VAULT_SELECTION_VIDEO
-            )
-            else -> startActivityForResult(
-                VaultSelectorIntentHelper.selectMultipleImageIntent(),
-                RC_VAULT_SELECTION_IMAGE
-            )
+            1 -> videoPickerLauncher.launch(VaultSelectorIntentHelper.selectVideoIntent())
+            else -> imagePickerLauncher.launch(VaultSelectorIntentHelper.selectMultipleImageIntent())
         }
     }
 
@@ -120,17 +104,10 @@ class VaultActivity : BaseActivity<VaultViewModel>() {
         }
     }
 
-
     companion object {
-
-        private const val RC_VAULT_SELECTION_IMAGE = 101
-
-        private const val RC_VAULT_SELECTION_VIDEO = 102
 
         fun newIntent(context: Context): Intent {
             return Intent(context, VaultActivity::class.java)
         }
-
     }
-
 }
