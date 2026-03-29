@@ -1,6 +1,10 @@
 package com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog
 
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,12 +40,25 @@ class AddToVaultDialog : BaseBottomSheetDialog<AddToVaultViewModel>() {
             binding.executePendingBindings()
 
             if (viewState.processState == ProcessState.COMPLETE) {
-                onDismissListener?.invoke()
-                dismiss()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && viewState.undeletedMediaUris.isNotEmpty()) {
+                    val request = MediaStore.createDeleteRequest(requireContext().contentResolver, viewState.undeletedMediaUris)
+                    deleteRequestLauncher.launch(IntentSenderRequest.Builder(request.intentSender).build())
+                } else {
+                    finish()
+                }
             }
         })
 
         filePath?.let { viewModel.setSelectedFilePath(it, mediaType) }
+    }
+
+    // The dialog closes whatever the user decides, the media is in the vault either way.
+    private val deleteRequestLauncher =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { finish() }
+
+    private fun finish() {
+        onDismissListener?.invoke()
+        dismiss()
     }
 
     companion object {
