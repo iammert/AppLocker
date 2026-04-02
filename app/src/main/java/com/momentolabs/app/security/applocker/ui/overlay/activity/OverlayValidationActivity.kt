@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.overlay.activity
 
+import androidx.activity.OnBackPressedCallback
 import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.app.Activity
 import android.content.Context
@@ -39,6 +40,10 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         secureWindow()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = goHome()
+        })
         binding = DataBindingUtil.setContentView(this, R.layout.activity_overlay_validation)
 
         updateLaunchingAppIcon(intent.getStringExtra(KEY_PACKAGE_NAME).orEmpty())
@@ -83,15 +88,14 @@ class OverlayValidationActivity : BaseActivity<OverlayValidationViewModel>() {
         frontPictureLiveData.observe(this, Observer { })
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    /** Leaving the lock screen must not reveal the locked app, so back goes to the home screen. */
+    private fun goHome() {
         val intent = Intent("android.intent.action.MAIN")
         intent.addCategory("android.intent.category.HOME")
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }
-
 
     override fun onResume() {
         super.onResume()

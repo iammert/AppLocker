@@ -27,7 +27,7 @@ class CallBlockerActivity : BaseActivity<CallBlockerViewModel>() {
         binding.viewPager.adapter = CallBlockerPagerAdapter(this, supportFragmentManager)
         binding.tablayout.setupWithViewPager(binding.viewPager)
 
-        binding.imageViewBack.setOnClickListener { onBackPressed() }
+        binding.imageViewBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         binding.buttonBlockNumber.setOnClickListener { requestCallScreening() }
     }

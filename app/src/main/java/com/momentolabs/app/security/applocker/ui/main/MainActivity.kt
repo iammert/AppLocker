@@ -1,5 +1,8 @@
 package com.momentolabs.app.security.applocker.ui.main
 
+import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.drawerlayout.widget.DrawerLayout
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -42,6 +45,17 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
 
         binding.navView.setNavigationItemSelectedListener(this)
 
+        onBackPressedDispatcher.addCallback(this, closeDrawerCallback)
+        binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+            override fun onDrawerOpened(drawerView: View) {
+                closeDrawerCallback.isEnabled = true
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                closeDrawerCallback.isEnabled = false
+            }
+        })
+
         viewModel.getPatternCreationNeedLiveData().observe(this, Observer { isPatternCreateNeed ->
             when {
                 isPatternCreateNeed -> createPatternLauncher.launch(CreateNewPatternActivity.newIntent(this))
@@ -52,11 +66,9 @@ class MainActivity : BaseActivity<MainViewModel>(), NavigationView.OnNavigationI
         })
     }
 
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+    private val closeDrawerCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
         }
     }
 

@@ -41,6 +41,7 @@
     <application
         android:name=".AppLockerApplication"
         android:allowBackup="false"
+        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"
         android:preserveLegacyExternalStorage="true"

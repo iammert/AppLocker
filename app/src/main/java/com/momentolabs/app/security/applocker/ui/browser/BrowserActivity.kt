@@ -1,5 +1,6 @@
 package com.momentolabs.app.security.applocker.ui.browser
 
+import androidx.activity.OnBackPressedCallback
 import com.momentolabs.app.security.applocker.util.extensions.secureWindow
 import android.content.Context
 import android.content.Intent
@@ -64,6 +65,8 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
 
         initializeWebView()
 
+        onBackPressedDispatcher.addCallback(this, browserBackCallback)
+
         binding.imageViewBack.setOnClickListener { finish() }
 
         binding.layoutFacebook.setOnClickListener {
@@ -113,21 +116,14 @@ class BrowserActivity : BaseActivity<BrowserViewModel>(), BookmarksDialog.Bookma
         })
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.action == KeyEvent.ACTION_DOWN) {
-            when (keyCode) {
-                KeyEvent.KEYCODE_BACK -> {
-                    when {
-                        binding.webView.canGoBack() -> goBackInWebView()
-                        viewModel.isResetMode() -> finish()
-                        else -> viewModel.reset()
-                    }
-                    return true
-                }
+    private val browserBackCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            when {
+                binding.webView.canGoBack() -> goBackInWebView()
+                viewModel.isResetMode() -> finish()
+                else -> viewModel.reset()
             }
-
         }
-        return super.onKeyDown(keyCode, event)
     }
 
     override fun onBookmarkItemSelected(bookmarkEntity: BookmarkEntity) {
