@@ -13,6 +13,7 @@ import com.momentolabs.app.security.applocker.util.encryptor.FileEncryptor
 import com.momentolabs.app.security.applocker.util.extensions.doOnBackground
 import com.momentolabs.app.security.applocker.util.helper.file.*
 import io.reactivex.BackpressureStrategy
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
@@ -157,7 +158,17 @@ class VaultRepository @Inject constructor(
             fileExtension = FileExtension.NONE
         )
 
+        // The preview is created unencrypted in the cache, remove it once the encrypted copy exists.
         return fileEncryptor.encrypt(previewFile, encryptFileOperationRequest)
+            .doFinally { previewFile.delete() }
+    }
+
+    /**
+     * Deletes the decrypted previews that are cached while the vault is open, so no plain
+     * thumbnail stays on the device after it is closed.
+     */
+    fun clearDecryptedPreviews(): Completable = Completable.fromAction {
+        context.cacheDir.listFiles { file -> file.name.startsWith(PREFIX_PREVIEW) }?.forEach { it.delete() }
     }
 
     private fun createFileName(mediaType: VaultMediaType): String {
