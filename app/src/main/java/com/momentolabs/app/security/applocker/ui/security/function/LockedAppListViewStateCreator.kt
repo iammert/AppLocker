@@ -12,22 +12,8 @@ class LockedAppListViewStateCreator : BiFunction<List<AppData>, List<LockedAppEn
         installedApps: List<AppData>,
         lockedApps: List<LockedAppEntity>
     ): List<AppLockItemItemViewState> {
-        val itemViewStateList: ArrayList<AppLockItemItemViewState> = arrayListOf()
-
-        installedApps.forEach { installedApp ->
-            val itemViewState =
-                AppLockItemItemViewState(installedApp)
-
-            lockedApps.forEach { lockedApp ->
-                if (installedApp.packageName == lockedApp.packageName) {
-                    itemViewState.isLocked = true
-                }
-            }
-
-            itemViewStateList.add(itemViewState)
-        }
-
-        return itemViewStateList
+        val lockedPackages = lockedApps.mapTo(HashSet()) { it.packageName }
+        return installedApps.map { AppLockItemItemViewState(it, isLocked = it.packageName in lockedPackages) }
     }
 
     companion object {

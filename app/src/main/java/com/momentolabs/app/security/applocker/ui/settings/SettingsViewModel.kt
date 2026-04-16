@@ -43,7 +43,7 @@ class SettingsViewModel @Inject constructor(
         }
 
     init {
-        val installedAppsObservable = appDataProvider.fetchInstalledAppList().toObservable()
+        val installedAppsObservable = appDataProvider.fetchInstalledAppList(loadIcons = false).toObservable()
         val lockedAppsObservable = lockedAppsDao.getLockedApps().toObservable()
 
         disposables += IsAllAppsLockedStateCreator.create(
@@ -74,7 +74,7 @@ class SettingsViewModel @Inject constructor(
 
     fun lockAll() {
         disposables += appDataProvider
-            .fetchInstalledAppList()
+            .fetchInstalledAppList(loadIcons = false)
             .map {
                 val entityList: ArrayList<LockedAppEntity> = arrayListOf()
                 it.forEach {
