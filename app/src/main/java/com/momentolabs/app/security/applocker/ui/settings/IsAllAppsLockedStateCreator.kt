@@ -7,8 +7,16 @@ import io.reactivex.functions.BiFunction
 
 class IsAllAppsLockedStateCreator : BiFunction<List<AppData>, List<LockedAppEntity>, Boolean> {
 
+    /**
+     * Compares package names instead of list sizes: the locked list can still contain apps that
+     * were uninstalled, which made the sizes match while some installed apps were unlocked.
+     */
     override fun apply(installedApps: List<AppData>, lockedApps: List<LockedAppEntity>): Boolean {
-        return installedApps.size == lockedApps.size
+        if (installedApps.isEmpty()) {
+            return false
+        }
+        val lockedPackages = lockedApps.mapTo(HashSet()) { it.packageName }
+        return installedApps.all { it.packageName in lockedPackages }
     }
 
     companion object {
