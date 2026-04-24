@@ -50,6 +50,11 @@ android {
         buildConfig = true
     }
 
+    androidResources {
+        // Lists the translations in the system's per-app language settings on Android 13.
+        generateLocaleConfig = true
+    }
+
     testOptions {
         unitTests.includeAndroidResources = true
     }
