@@ -21,9 +21,16 @@
 -renamesourcefileattribute SourceFile
 
 
--ignorewarnings
 
 -keep class org.ocpsoft.prettytime.i18n.**
 
 #Crypto
 -keep class com.facebook.** { *; }
+
+# OkHttp, used by Picasso, only uses Conscrypt when it is on the classpath.
+-dontwarn org.conscrypt.**
+
+# The database migration to version 5 reads the old pattern JSON with Gson.
+-keep class com.momentolabs.app.security.applocker.data.database.pattern.PatternDot { *; }
+-keep class com.momentolabs.app.security.applocker.data.database.pattern.PatternDotMetadata { *; }
+
