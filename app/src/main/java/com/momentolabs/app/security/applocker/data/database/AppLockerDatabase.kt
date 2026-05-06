@@ -25,7 +25,7 @@ import com.momentolabs.app.security.applocker.data.database.vault.VaultMediaEnti
 @Database(
     entities = [LockedAppEntity::class, PatternHashEntity::class, BookmarkEntity::class, VaultMediaEntity::class, BlackListItemEntity::class, CallLogItemEntity::class],
     version = 5,
-    exportSchema = false
+    exportSchema = true
 )
 @TypeConverters(DateTypeConverters::class)
 abstract class AppLockerDatabase : RoomDatabase() {

@@ -60,6 +60,11 @@ android {
     }
 }
 
+ksp {
+    // Keeps the schema of every database version in git, so migrations can be reviewed and tested.
+    arg('room.schemaLocation', "$projectDir/schemas")
+}
+
 kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
