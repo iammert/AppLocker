@@ -3,6 +3,7 @@ package com.momentolabs.app.security.applocker.service.stateprovider
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.os.SystemClock
 import com.momentolabs.app.security.applocker.ui.overlay.activity.OverlayValidationActivity
 import com.momentolabs.app.security.applocker.ui.permissions.PermissionChecker
 import io.reactivex.Flowable
@@ -23,8 +24,18 @@ class AppForegroundObservable @Inject constructor(val context: Context) {
 
     fun get(): Flowable<String> = Flowable.defer {
         var queryStartTime = System.currentTimeMillis() - INITIAL_LOOKBACK_MILLIS
+        var hasUsageAccess = false
+        var lastPermissionCheck = 0L
         Flowable.interval(0, POLL_INTERVAL_MILLIS, TimeUnit.MILLISECONDS)
-            .filter { PermissionChecker.checkUsageAccessPermission(context) }
+            .filter {
+                // The check makes two binder calls, which is too much to repeat every 100 ms.
+                val now = SystemClock.elapsedRealtime()
+                if (now - lastPermissionCheck >= PERMISSION_CHECK_INTERVAL_MILLIS) {
+                    hasUsageAccess = PermissionChecker.checkUsageAccessPermission(context)
+                    lastPermissionCheck = now
+                }
+                hasUsageAccess
+            }
             .concatMapIterable {
                 val now = System.currentTimeMillis()
                 val usageEvents = usageStatsManager.queryEvents(queryStartTime, now)
@@ -49,6 +60,7 @@ class AppForegroundObservable @Inject constructor(val context: Context) {
 
     companion object {
         private const val POLL_INTERVAL_MILLIS = 100L
+        private const val PERMISSION_CHECK_INTERVAL_MILLIS = 5_000L
         private val INITIAL_LOOKBACK_MILLIS = TimeUnit.HOURS.toMillis(1)
     }
 }
