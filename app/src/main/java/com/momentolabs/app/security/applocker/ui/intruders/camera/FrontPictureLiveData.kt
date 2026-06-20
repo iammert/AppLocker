@@ -5,7 +5,6 @@ import android.app.Application
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import androidx.lifecycle.MutableLiveData
-import com.momentolabs.app.security.applocker.util.helper.file.MediaScannerConnector
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -36,10 +35,19 @@ class FrontPictureLiveData(val app: Application, private val destinationImageFil
 
         state = State.TAKING
         startCamera()
-        camera?.takePicture(
-            null,
-            null,
-            Camera.PictureCallback { data, camera -> savePicture(data) })
+        val openCamera = camera ?: return
+        try {
+            openCamera.takePicture(null, null) { data, _ ->
+                // Release the camera right away, so the privacy indicator turns off and other
+                // apps can use the camera again.
+                stopCamera()
+                savePicture(data)
+            }
+        } catch (exception: RuntimeException) {
+            stopCamera()
+            state = State.ERROR
+            value = FrontPictureState.Error(exception)
+        }
     }
 
     private fun startCamera() {
@@ -52,6 +60,7 @@ class FrontPictureLiveData(val app: Application, private val destinationImageFil
                 state = State.ERROR
                 return
             }
+            stopCamera()
             camera = Camera.open(cameraId).also {
                 it.setPreviewTexture(dummy)
                 it.startPreview()
@@ -64,9 +73,10 @@ class FrontPictureLiveData(val app: Application, private val destinationImageFil
     }
 
     private fun stopCamera() {
-        camera?.stopPreview()
-        camera?.release()
+        val openCamera = camera ?: return
         camera = null
+        openCamera.stopPreview()
+        openCamera.release()
         value = FrontPictureState.Destroyed()
     }
 
@@ -91,13 +101,8 @@ class FrontPictureLiveData(val app: Application, private val destinationImageFil
         Single
             .create<String> { emitter ->
                 try {
-                    val pictureFile = destinationImageFile
-                    pictureFile?.let {
-                        val fos = FileOutputStream(pictureFile)
-                        fos.write(data)
-                        fos.close()
-                        emitter.onSuccess(it.absolutePath)
-                    }
+                    FileOutputStream(destinationImageFile).use { it.write(data) }
+                    emitter.onSuccess(destinationImageFile.absolutePath)
                 } catch (e: Exception) {
                     emitter.onError(e)
                 }
@@ -108,17 +113,11 @@ class FrontPictureLiveData(val app: Application, private val destinationImageFil
                 { filePath ->
                     state = State.TAKEN
                     value = FrontPictureState.Taken(filePath)
-                    refreshFileSystem(filePath)
                 },
                 {
                     state = State.ERROR
                     value = FrontPictureState.Error(it)
                 })
-    }
-
-    private fun refreshFileSystem(originalPath: String) {
-
-        MediaScannerConnector.scan(app, originalPath)
     }
 
     companion object {
