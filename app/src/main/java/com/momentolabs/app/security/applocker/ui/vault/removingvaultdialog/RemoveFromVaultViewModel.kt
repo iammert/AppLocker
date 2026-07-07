@@ -12,7 +12,6 @@ import com.momentolabs.app.security.applocker.ui.vault.addingvaultdialog.Process
 import com.momentolabs.app.security.applocker.util.encryptor.CryptoProcess
 import com.momentolabs.app.security.applocker.util.extensions.plusAssign
 import com.momentolabs.app.security.applocker.util.helper.file.MediaScannerConnector
-import com.momentolabs.app.security.applocker.util.helper.progress.FakeProgress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -24,29 +23,12 @@ class RemoveFromVaultViewModel @Inject constructor(
 
     private val removeFromVaultProcessLiveData = MutableLiveData<CryptoProcess>()
 
-    private val fakeProgress = FakeProgress()
-
     private val removeFromVaultViewStateLiveData =
         MutableLiveData<RemoveFromVaultViewState>()
             .apply {
                 value =
                     RemoveFromVaultViewState(progress = 0, processState = ProcessState.PROCESSING)
             }
-
-
-    init {
-        with(fakeProgress) {
-            setOnProgressListener {
-                removeFromVaultViewStateLiveData.value =
-                    RemoveFromVaultViewState(it, ProcessState.PROCESSING)
-            }
-
-            setOnCompletedListener {
-                removeFromVaultViewStateLiveData.value =
-                    RemoveFromVaultViewState(100, ProcessState.COMPLETE)
-            }
-        }
-    }
 
     fun removeMediaFromVault(vaultMediaEntity: VaultMediaEntity) {
         val decryptionObservable = vaultRepository
@@ -56,15 +38,17 @@ class RemoveFromVaultViewModel @Inject constructor(
         disposables += decryptionObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { fakeProgress.start() }
             .subscribe(
                 {
-                    when (it) {
-                        is CryptoProcess.Complete -> fakeProgress.complete()
-                        is CryptoProcess.Processing -> Unit
+                    removeFromVaultViewStateLiveData.value = when (it) {
+                        is CryptoProcess.Processing -> RemoveFromVaultViewState(it.percentage, ProcessState.PROCESSING)
+                        is CryptoProcess.Complete -> RemoveFromVaultViewState(100, ProcessState.COMPLETE)
                     }
                 },
-                { ErrorLogger.log(it) })
+                {
+                    ErrorLogger.log(it)
+                    removeFromVaultViewStateLiveData.value = RemoveFromVaultViewState(100, ProcessState.COMPLETE)
+                })
     }
 
     fun getRemoveFromVaultViewStateLiveData() = removeFromVaultViewStateLiveData

@@ -16,7 +16,6 @@ import com.momentolabs.app.security.applocker.util.encryptor.CryptoProcess
 import com.momentolabs.app.security.applocker.util.extensions.plusAssign
 import com.momentolabs.app.security.applocker.util.helper.file.FileManager
 import com.momentolabs.app.security.applocker.util.helper.file.MediaScannerConnector
-import com.momentolabs.app.security.applocker.util.helper.progress.FakeProgress
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,8 +31,6 @@ class AddToVaultViewModel @Inject constructor(
     private val fileManager: FileManager
 ) : RxAwareAndroidViewModel(app) {
 
-    private val fakeProgress = FakeProgress()
-
     private val undeletedMediaUris = mutableListOf<Uri>()
 
     private val addToVaultViewStateLiveData = MutableLiveData<AddToVaultViewState>()
@@ -41,43 +38,51 @@ class AddToVaultViewModel @Inject constructor(
             value = AddToVaultViewState(progress = 0, processState = ProcessState.PROCESSING)
         }
 
-    init {
-        with(fakeProgress) {
-            setOnProgressListener {
-                addToVaultViewStateLiveData.value = AddToVaultViewState(it, ProcessState.PROCESSING)
-            }
-
-            setOnCompletedListener {
-                addToVaultViewStateLiveData.value = AddToVaultViewState(
-                    100,
-                    ProcessState.COMPLETE,
-                    synchronized(undeletedMediaUris) { undeletedMediaUris.toList() }
-                )
-            }
-        }
-    }
-
     fun setSelectedFilePath(selectedFilePath: ArrayList<String>, mediaType: VaultMediaType) {
 
-        val list = arrayListOf<Observable<CryptoProcess>>()
+        if (selectedFilePath.isEmpty()) {
+            onCompleted()
+            return
+        }
 
-        for (selected in selectedFilePath) {
-            val encryptionObservable = vaultRepository
+        val encryptions = selectedFilePath.mapIndexed { index, selected ->
+            vaultRepository
                 .addMediaToVault(selected, mediaType)
                 .doOnNext {
                     if (it is CryptoProcess.Complete) {
                         removeOriginal(selected)
                     }
                 }
-
-            list.add(encryptionObservable)
+                .map { index to it }
         }
-        disposables += Observable.merge(list)
+
+        // Show the real progress, the average of all files, instead of a fake animation.
+        val fileProgress = IntArray(selectedFilePath.size)
+        disposables += Observable.merge(encryptions)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { fakeProgress.start() }
-            .doOnComplete { fakeProgress.complete() }
-            .subscribe({}, { ErrorLogger.log(it) })
+            .subscribe(
+                { (index, process) ->
+                    fileProgress[index] = when (process) {
+                        is CryptoProcess.Processing -> process.percentage
+                        is CryptoProcess.Complete -> 100
+                    }
+                    addToVaultViewStateLiveData.value =
+                        AddToVaultViewState(fileProgress.average().toInt(), ProcessState.PROCESSING)
+                },
+                {
+                    ErrorLogger.log(it)
+                    onCompleted()
+                },
+                { onCompleted() })
+    }
+
+    private fun onCompleted() {
+        addToVaultViewStateLiveData.value = AddToVaultViewState(
+            100,
+            ProcessState.COMPLETE,
+            synchronized(undeletedMediaUris) { undeletedMediaUris.toList() }
+        )
     }
 
     fun getAddToVaultViewStateLiveData(): LiveData<AddToVaultViewState> =
