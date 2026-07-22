@@ -21,8 +21,6 @@ class RemoveFromVaultViewModel @Inject constructor(
     private val vaultRepository: VaultRepository
 ) : RxAwareAndroidViewModel(app) {
 
-    private val removeFromVaultProcessLiveData = MutableLiveData<CryptoProcess>()
-
     private val removeFromVaultViewStateLiveData =
         MutableLiveData<RemoveFromVaultViewState>()
             .apply {
