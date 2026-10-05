@@ -76,7 +76,7 @@ class FileManager @Inject constructor(val context: Context) {
         return File(parent, subFolder.folderName).apply { mkdirs() }
     }
 
-    /** Folder used before 1.6.0, in the root of the shared storage. */
+    /** Folder used before 2.0.0, in the root of the shared storage. */
     fun getLegacyDirectory(subFolder: SubFolder): File =
         File(Environment.getExternalStorageDirectory(), "applocker/${subFolder.folderName}")
 
